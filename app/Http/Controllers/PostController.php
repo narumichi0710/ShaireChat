@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Http\Request;
-use App\Models\Post;
 use App\Http\Requests\PostRequest;
 use Illuminate\Support\MessageBag;
 use InterventionImage;
 use Illuminate\Support\Facades\Auth;
-
+use App\Models\Post;
+use App\Models\Tag;
 
 class PostController extends Controller
 {
@@ -19,39 +20,43 @@ class PostController extends Controller
      */
     public function index()
     {
-
         $user = \Auth::user();
         $id = Auth::id();
 
-        $posts = Post::withCount('users')->orderBy('users_count', 'desc')->paginate(5);
-
+        $posts = Post::withCount('users')->orderBy('users_count', 'desc')->simplePaginate(5);
 
         $q = \Request::query();
 
-        if(isset($q['category_id'])){
-            $posts = Post::latest()->where('category_id', $q['category_id'])->paginate(3);
-            $posts->load('category', 'user' );
-
+        if (isset($q['category_id'])) {
+            $posts = Post::latest()->where('category_id', $q['category_id'])->simplePaginate(5);
+            $posts->load('category', 'user');
 
             $authUser = Auth::user();
             $param = [
-            'authUser' => $authUser,
+                'authUser' => $authUser,
             ];
 
             return view('posts.index', [
-                'posts' => $posts,$param,
+                'posts' => $posts, $param,
                 'category_id' => $q['category_id'],
                 'authUser' => $authUser,
                 'user' => $user
             ]);
+        } if (isset($q['tag_name'])) {
+            $posts = Post::latest()->where('content', 'like', "%{$q['tag_name']}%")->simplePaginate(5);
+            $posts->load('category', 'user', 'tags');
 
+            return view('posts.index', [
+                'posts' => $posts,
+                'tag_name' => $q['tag_name']
+            ]);
         } else {
             $posts = Post::latest()->simplePaginate(5);
             $posts->load('category', 'user');
 
             $authUser = Auth::user();
             $param = [
-            'authUser' => $authUser,
+                'authUser' => $authUser,
             ];
 
             return view('posts.index', [
@@ -60,6 +65,8 @@ class PostController extends Controller
             ]);
         }
     }
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -80,23 +87,40 @@ class PostController extends Controller
     public function store(PostRequest $request)
     {
 
-        if($request->file('image')->isValid()) {
+        if ($request->file('image')->isValid()) {
 
-        $post = new Post;
-        $input = $request->only($post->getFillable());
-        $post->user_id = $request->user_id;
-        $post->category_id = $request->category_id;
-        $post->content = $request->content;
-        $post->title = $request->title;
+            $post = new Post;
+            $input = $request->only($post->getFillable());
+            $post->user_id = $request->user_id;
+            $post->category_id = $request->category_id;
+            $post->content = $request->content;
+            $post->title = $request->title;
 
-        $filename = $request->file('image')->store('/public/image');
+            $filename = $request->file('image')->store('/public/image');
 
-        $post->image = basename($filename);
+            $post->image = basename($filename);
 
-        $post->save();
+            preg_match_all('/#([a-zA-Z0-9０-９ぁ-んァ-ヶー一-龠]+)/u', $request->content, $match);
+
+
+            $tags = [];
+
+            foreach ($match[1] as $tag) {
+                $found = Tag::firstOrCreate(['tag_name' => $tag]);
+
+                array_push($tags, $found);
+            }
+
+            $tag_ids = [];
+
+            foreach ($tags as $tag) {
+                    array_push($tag_ids, $tag['id']);
+            }
+
+            $post->save();
+            $post->tags()->attach($tag_ids);
+
         }
-
-
 
         return redirect('/');
     }
@@ -109,14 +133,14 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        $post->load('category', 'user', 'comments.user', );
+        $post->load('category', 'user', 'comments.user',);
         $authUser = Auth::user();
         $param = [
-        'authUser' => $authUser,
+            'authUser' => $authUser,
         ];
 
         return view('posts.show', [
-            'post' => $post,$param
+            'post' => $post, $param
 
         ]);
     }
@@ -158,16 +182,15 @@ class PostController extends Controller
     {
 
         $posts = Post::where('title', 'like', "%{$request->search}%")
-        ->orWhere('content', 'like', "%{$request->search}%")
-        ->paginate(5);
+            ->orWhere('content', 'like', "%{$request->search}%")
+            ->simplePaginate(5);
 
-        $search_result = $request->search.'の検索結果'.$posts->total().'件';
+        $search_result = $request->search . 'の検索結果' . $posts->total() . '件';
 
         return view('posts.index', [
             'posts' => $posts,
             'search_results' => $search_result,
             'search_query' => $request->search
-            ]);
+        ]);
     }
-
 }

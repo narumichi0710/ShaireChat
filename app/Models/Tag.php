@@ -11,5 +11,9 @@ class Tag extends Model
         'tag_name'
     ];
 
+    public function tags()
+    {
+        return $this->belongsToMany(\App\Models\Tags::class);
+    }
 
 }

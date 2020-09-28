@@ -12,7 +12,7 @@
                 <a href="{{ route('user.userEdit') }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
                     <dl class="mb-0">
                         <dt>{{ __('Profile') }}</dt>
-                        <dd class="mb-0">{{ $authUser->name }}</dd>
+                        <dd class="mb-0">{{ $authUser->name}}</dd>
                     </dl>
                     <div><i class="fas fa-chevron-right"></i></div>
                 </a>

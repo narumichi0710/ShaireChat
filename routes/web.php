@@ -42,3 +42,6 @@ Route::post('posts/{post}/favorites', 'App\Http\Controllers\FavoriteController@s
 Route::post('posts/{post}/unfavorites', 'App\Http\Controllers\FavoriteController@destroy')->name('unfavorites');
 
 
+
+
+

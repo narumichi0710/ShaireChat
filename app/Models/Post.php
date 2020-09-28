@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
+
+
     protected $fillable = [
         'user_id', 'category_id', 'content', 'title', 'image'
     ];
@@ -38,6 +40,14 @@ class Post extends Model
     {
         return $this->belongsToMany('App\Models\User')->withTimestamps();
     }
+
+    public function tags()
+    {
+        return $this->belongsToMany('App\Models\Tag')->withTimestamps();
+    }
+
+
+
 
 
 }

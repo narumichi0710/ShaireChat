@@ -59,17 +59,26 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-3 pt-5" style="padding:0;margin:0;">
-        <div class="card-body">
-        <h4>カテゴリ</h4>
-            <div class="card">
-              <a href="/?category_id=1">技術</a>
-              <a href="/?category_id=2">悩み・相談</a>
-              <a href="/?category_id=3">集客・経営</a>
-              <a href="/?category_id=4">海外美容師</a>
-              <a href="/?category_id=5">フリーランス</a>
-              <a href="/?category_id=6">その他</a>
+            <div class="card-body">
+                <h4>カテゴリ</h4>
+                <div class="card">
+                    <a href="/?category_id=1">技術</a>
+                    <a href="/?category_id=2">悩み・相談</a>
+                    <a href="/?category_id=3">集客・経営</a>
+                    <a href="/?category_id=4">海外美容師</a>
+                    <a href="/?category_id=5">フリーランス</a>
+                    <a href="/?category_id=6">その他</a>
+                </div>
             </div>
-        </div>
+            <div class="card-body">
+                <h4>話題のタグ</h4>
+
+                <div class="card">
+
+
+                </div>
+            </div>
+
 
         </div>
         <div class="col-md-6 pt-4" style="padding:0;margin:0;">
@@ -106,8 +115,16 @@
                         </h5>
                         <h3 class="card-title">{{ $post->title }}</h3>
                         <p>いいね数：{{ count($post->users) }}</p>
+                        <small>
+                            @foreach($post->tags as $tag)
+                            <a href="{{ route('posts.index', ['tag_name' => $tag->tag_name] )}}">
+                                #{{ $tag->tag_name }}
+                            </a>
+                            @endforeach
+                        </small>
 
                         <p class="card-text">{{ $post->content }}</p>
+
                         <div class="row col-md">
                             <a href="{{ route('posts.show', $post->id) }}" class="fas btn btn-primary">続きを見る</a>
 
@@ -128,23 +145,30 @@
 
 
                 </div>
-                @endforeach
 
+                @endforeach
+                <div>
                 @if(isset($category_id))
-                {{ $posts->appends(['category_id' => $category_id])->links()  }}
+                {{ $posts->appends(['category_id' => $category_id])->links() }}
+
+                @elseif(isset($tag_name))
+                {{ $posts->appends(['tag_name' => $tag_name])->links() }}
+
                 @elseif(isset($search_query))
                 {{ $posts->appends(['search' => $search_query])->links() }}
+
                 @else
                 {{ $posts->links() }}
                 @endif
+                </div>
             </div>
         </div>
 
 
         <div class="col-md-3 pt-5" style="padding:0;margin:0;">
-        <div class="card-body">
+            <div class="card-body">
                 <div class="card-title">
-                    <h4>いいねラ ンキング</h4>
+                    <h4>いいねランキング</h4>
                 </div>
 
                 <div class="card">
