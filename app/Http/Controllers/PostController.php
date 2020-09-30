@@ -23,12 +23,12 @@ class PostController extends Controller
         $user = \Auth::user();
         $id = Auth::id();
 
-        $posts = Post::withCount('users')->orderBy('users_count', 'desc')->simplePaginate(5);
+
 
         $q = \Request::query();
 
         if (isset($q['category_id'])) {
-            $posts = Post::latest()->where('category_id', $q['category_id'])->simplePaginate(5);
+            $posts = Post::latest()->where('category_id', $q['category_id'])->simplePaginate(9);
             $posts->load('category', 'user');
 
             $authUser = Auth::user();
@@ -43,7 +43,7 @@ class PostController extends Controller
                 'user' => $user
             ]);
         } if (isset($q['tag_name'])) {
-            $posts = Post::latest()->where('content', 'like', "%{$q['tag_name']}%")->simplePaginate(5);
+            $posts = Post::latest()->where('content', 'like', "%{$q['tag_name']}%")->simplePaginate(9);
             $posts->load('category', 'user', 'tags');
 
             return view('posts.index', [
@@ -51,7 +51,7 @@ class PostController extends Controller
                 'tag_name' => $q['tag_name']
             ]);
         } else {
-            $posts = Post::latest()->simplePaginate(5);
+            $posts = Post::latest()->simplePaginate(9);
             $posts->load('category', 'user');
 
             $authUser = Auth::user();
@@ -183,7 +183,7 @@ class PostController extends Controller
 
         $posts = Post::where('title', 'like', "%{$request->search}%")
             ->orWhere('content', 'like', "%{$request->search}%")
-            ->simplePaginate(5);
+            ->paginate(5);
 
         $search_result = $request->search . 'の検索結果' . $posts->total() . '件';
 

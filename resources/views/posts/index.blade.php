@@ -16,24 +16,25 @@
         <div class="row">
             <div class="col-12 col-md-6">
                 <div class="card">
-                    <div class="card-header bg-light">記事を書こう</div>
+                    <div class="card-header bg-light">レシピを記載しよう
+                    </div>
                     <div class="card-body">
                         <h5 class="card-title">自由に投稿</h5>
                         <p class="card-text">
-                            メモとして使っても、質問や議論でもOK。気になること、書きたいことをどんどん投稿できます。
+                            質問や議論でもOK。気になること、書きたいことをどんどん投稿できます。
                         </p>
                     </div>
                 </div>
             </div>
             <div class="col-12 col-md-6 mt-4 mt-md-0">
                 <div class="card" style="height: 100%">
-                    <div class="card-header bg-light">ヘアスタイルを投稿しよう</div>
+                    <div class="card-header bg-light">質問をしよう</div>
                     <div class="card-body">
                         <h5 class="card-title"></h5>
                         <p class="card-text">
                         </p>
                         <p class="card-text">
-                            掲示板等として利用したり、色々な使い方が可能です。
+
                         </p>
 
                     </div>
@@ -57,8 +58,8 @@
 
 
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-3 pt-5" style="padding:0;margin:0;">
+    <div class="row">
+        <div class="col-md-2 pt-5" style="padding:0;margin:0;">
             <div class="card-body">
                 <h4>カテゴリ</h4>
                 <div class="card">
@@ -79,24 +80,44 @@
                 </div>
             </div>
 
+            <div class="card-body">
+                <div class="card-title">
+                    <h4>いいねが多い記事</h4>
+                </div>
+
+                <div class="card">
+                    @foreach($posts as $post)
+                    <a href="">{{ $post->id}}</a>
+                    <a href="">{{ $post->user_id}}</a>
+                    <a href="">{{ $post->post_id}}</a>
+                    @endforeach
+
+                    <a class="text-secondary" href="#"></a>
+                </div>
+            </div>
+
 
         </div>
-        <div class="col-md-6 pt-4" style="padding:0;margin:0;">
+        <div class="col-md-10 pt-4">
             <div class="card-body">
-                <h3>最近の質問</h3>
+                <h3>最近の投稿</h3>
                 @if (session('status'))
                 <div class="alert alert-success" role="alert">
                     {{ session('status') }}
                 </div>
                 @endif
+            </div>
+            <div class="container">
+            <div class="row">
+            @foreach($posts as $post)
 
-                @foreach($posts as $post)
-                <div class="card">
+                <div class="card col-md-4" style="width:100%; height:100%;">
                     <div class="card-body">
+                    <h3 class="card-title">{{ $post->title }}</h3>
                         <h5 class="card-title">
                             @if($post->user->thumbnail)
                             <a href="{{ route('users.show', $post->user_id) }}">
-                                <img src="/storage/user/{{ $post->user->thumbnail }}" alt="" style="width:40px; height:40px; border-radius:50%; position:relative;
+                                <img src="/storage/user/{{ $post->user->thumbnail }}" alt="" style="width:35px; height:35px; border-radius:50%; position:relative;
                             "></a>
                             @else
                             <a href="{{ route('users.show', $post->user_id) }}">
@@ -113,8 +134,8 @@
                             </small>
                             <small>{{ date("Y-m-d H:i" ,strtotime($post->created_at)) }}</small>
                         </h5>
-                        <h3 class="card-title">{{ $post->title }}</h3>
-                        <p>いいね数：{{ count($post->users) }}</p>
+
+
                         <small>
                             @foreach($post->tags as $tag)
                             <a href="{{ route('posts.index', ['tag_name' => $tag->tag_name] )}}">
@@ -142,12 +163,15 @@
 
                         </div>
                     </div>
-
-
                 </div>
 
+
                 @endforeach
-                <div>
+
+            </div>
+            </div>
+            <div>
+
                 @if(isset($category_id))
                 {{ $posts->appends(['category_id' => $category_id])->links() }}
 
@@ -160,29 +184,12 @@
                 @else
                 {{ $posts->links() }}
                 @endif
-                </div>
             </div>
+
+
+
+
         </div>
-
-
-        <div class="col-md-3 pt-5" style="padding:0;margin:0;">
-            <div class="card-body">
-                <div class="card-title">
-                    <h4>いいねランキング</h4>
-                </div>
-
-                <div class="card">
-                    @foreach($posts as $post)
-                    <a class="text-secondary" href="#">{{ $post->title }}</a>
-                    @endforeach
-
-                    {{ count($post->users) }}
-                </div>
-            </div>
-        </div>
-
-
     </div>
-</div>
-
-@endsection
+    </div>
+    @endsection

@@ -15,7 +15,7 @@ class FavoriteController extends Controller
      */
     public function index()
     {
-        
+        $posts = Post::orderBy('post_user_id.id', 'desc')->where('post_user_id.id', 'hogehoge')->simplePaginate(5);
     }
 
     /**
@@ -39,6 +39,7 @@ class FavoriteController extends Controller
         $post->users()->attach(Auth::id());
 
         return redirect()->route('posts.index');
+
     }
 
     /**

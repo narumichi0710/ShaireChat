@@ -23,6 +23,7 @@
                                 {{ $post->user->name }}</a></h5>
 
                         <p class="card-text">{{ $post->content }}</p>
+                        <h3 class="card-title">{{ $post->title }}</h3>
                         <img src="{{ asset('storage/image/'.$post->image) }}" alt="" style="width:100%; max-width:300px;">
                         <div class="row col-md pt-4">
                             @if($post->users()->where('user_id', Auth::id())->exists())
@@ -36,6 +37,7 @@
                             </form>
 
                             @endif
+
 
                         </div>
                     </div>
@@ -57,10 +59,10 @@
                         </div>
                     </div>
                     @endforeach
-                     
+
                     <a href="{{ route('comments.create', ['post_id' => $post->id]) }}" class="fas btn btn-primary" style="margin:20px 0px;">コメントする</a>
-                   
-                   
+
+
 
                 </div>
             </div>
