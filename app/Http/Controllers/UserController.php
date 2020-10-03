@@ -3,12 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\UserUpdateRequest;
+use App\Http\Requests\ChangeEmailRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Validator;
 use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Support\Facades\Storage;
+
 
 class UserController extends Controller
 {
@@ -55,27 +58,8 @@ class UserController extends Controller
         return view('user.userEdit', $param);
     }
 
-    public function userUpdate(Request $request)
+    public function userUpdate(UserUpdateRequest $request)
     {
-        // Validator check
-        $rules = [
-            'user_id' => 'integer|required',
-            'name' => 'required',
-
-        ];
-        $messages = [
-            'user_id.integer' => 'SystemError:システム管理者にお問い合わせください',
-            'user_id.required' => 'SystemError:システム管理者にお問い合わせください',
-            'name.required' => 'ユーザー名が未入力です',
-
-        ];
-        $validator = Validator::make($request->all(), $rules, $messages);
-
-        if ($validator->fails()) {
-            return redirect('/user/userEdit')
-                ->withErrors($validator)
-                ->withInput();
-        }
 
         $uploadfile = $request->file('thumbnail');
 
@@ -106,36 +90,13 @@ class UserController extends Controller
         return view('user.userEditEmail', $param);
     }
 
-    public function userUpdateEmail(Request $request)
+    public function userUpdateEmail(ChangeEmailRequest $request)
     {
-        // Validator check
-        $rules = [
-            'user_id' => 'integer|required',
-            'email' => 'required',
-
-        ];
-        $messages = [
-            'user_id.integer' => 'SystemError:システム管理者にお問い合わせください',
-            'user_id.required' => 'SystemError:システム管理者にお問い合わせください',
-            'email.required' => 'メールアドレスに誤りがあります',
-
-        ];
-        $validator = Validator::make($request->all(), $rules, $messages);
-
-        if ($validator->fails()) {
-            return redirect('/user/userEditEmail')
-                ->withErrors($validator)
-                ->withInput();
-
-                $param = [
-                    'email' => $request->email,
-                ];
-        }else{
-
+      
        $param = [
                 'email' => $request->email,
             ];
-        }
+        
         User::where('id', $request->user_id)->update($param);
         return redirect(route('user.index'))->with('success', 'メールアドレスを変更しました。');
     }

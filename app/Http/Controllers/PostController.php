@@ -23,8 +23,6 @@ class PostController extends Controller
         $user = \Auth::user();
         $id = Auth::id();
 
-
-
         $q = \Request::query();
 
         if (isset($q['category_id'])) {
@@ -35,12 +33,13 @@ class PostController extends Controller
             $param = [
                 'authUser' => $authUser,
             ];
-
+            
             return view('posts.index', [
                 'posts' => $posts, $param,
                 'category_id' => $q['category_id'],
                 'authUser' => $authUser,
                 'user' => $user
+                
             ]);
         } if (isset($q['tag_name'])) {
             $posts = Post::latest()->where('content', 'like', "%{$q['tag_name']}%")->simplePaginate(9);

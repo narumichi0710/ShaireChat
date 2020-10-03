@@ -34,7 +34,7 @@
                                 @if($errors->has('user_id'))
                                 <div class="error">{{ $errors->first('user_id') }}</div>
                                 @endif
-                                <input type="text" class="form-control" name="name" placeholder="User" value="{{ $authUser->name }}">
+                                <input type="text" class="form-control" name="name" placeholder="変更するお名前" value="{{ $authUser->name }}">
                                 @if($errors->has('name'))
                                 <div class="error">{{ $errors->first('name') }}</div>
                                 @endif

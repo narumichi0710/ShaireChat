@@ -33,7 +33,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="exampleFormControlFile1">ファイルを選択する(任意)</label>
+                                <label for="exampleFormControlFile1">ファイルを選択する</label>
                                 <input type="file" class="form-control-file" id="exampleFormControlFile1" name="image">
                             </div>
 

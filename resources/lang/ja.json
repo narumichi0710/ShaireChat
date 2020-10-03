@@ -35,5 +35,11 @@
     "E-mail Address":"メールアドレス",
     "Logout":"ログアウト",
     "Change Profile":"プロフィール変更",
-    "Profile":"プロフィール"
+    "Profile":"プロフィール",
+    "validation.max.string":"最大文字数を超えています。",
+    "Mail Address Change":"メールアドレス変更",
+    "Mail":"メールアドレス",
+    "pagination.previous":"戻る",
+    "pagination.next":"次へ"
+
     }

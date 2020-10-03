@@ -41,6 +41,11 @@ Route::post('/user/userEdit', 'App\Http\Controllers\UserController@userUpdate')-
 Route::post('posts/{post}/favorites', 'App\Http\Controllers\FavoriteController@store')->name('favorites');
 Route::post('posts/{post}/unfavorites', 'App\Http\Controllers\FavoriteController@destroy')->name('unfavorites');
 
+Route::get('/product', 'App\Http\Controllers\ProductController@index')->name('product.index');
+Route::get('/product/list', 'App\Http\Controllers\ProductController@list');
+Route::post('/product/review', 'App\Http\Controllers\ProductController@review')->name('product.review');
+
+Route::resource('/product', 'App\Http\Controllers\ProductController', ['only' => ['index', 'show']]);
 
 
 

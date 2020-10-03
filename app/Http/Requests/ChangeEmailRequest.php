@@ -28,8 +28,19 @@ class ChangeEmailRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => ['required', 'string', 'email', 'max:255']
+            'user_id' => 'integer|required',
+            'email' => 'required|string|email|max:255',
+            
             // Rule::unique('users', 'email')->ignore(Auth::id())->whereNull('deleted_at')]
         ];
     }
+    public function messeges()
+    {
+        return [
+        'user_id.integer' => 'SystemError:システム管理者にお問い合わせください',
+        'user_id.required' => 'SystemError:システム管理者にお問い合わせください',
+        'email.required' => 'メールアドレスに誤りがあります',
+        ];
+    }
+
 }

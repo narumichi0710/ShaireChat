@@ -3,12 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Http\Exceptions\HttpResponseException;
 
-
-
-class ChangeNameRequest extends FormRequest
+class UserUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -29,7 +25,7 @@ class ChangeNameRequest extends FormRequest
     {   
         return [
             'user_id' => 'integer|required',
-            'name' => 'required','string', 'max:255'
+            'name' => 'required|string|max:20'
         ];
     }
 
@@ -40,6 +36,8 @@ class ChangeNameRequest extends FormRequest
             'user_id.required' => 'SystemError:システム管理者にお問い合わせください',
             'name.required' => 'ユーザー名が未入力です',
         ];
+
+        
 
     }   
     

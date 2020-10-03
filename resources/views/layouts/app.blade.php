@@ -26,51 +26,59 @@
 
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-dark shadow-sm" style="background-color: #524e4d;">
+        <nav class="navbar navbar-expand-md navbar-light shadow-sm" style="background-color:white;">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}" style="font-family: 'Kalam', cursive; font-size:1.8em;">
 
                     {{ config('app.name', 'Shaire Chat') }}
                 </a>
+                
+                <div class="collapse navbar-collapse">
 
-                @if (Auth::check())
-                <div class="collapse navbar-collapse" >
-                <ul class="navbar-nav mr-auto">
-                        <form method="get" action="{{ route('posts.search') }}" accept-charset="UTF-8" class="form-inline my-2 my-md-0">
-
-                            <span class="bmd-form-group">
-                                <input name="search" value="" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" style="font-size:0.9em; background-color: #524e4d; border:none; border-bottom:1px solid #383c3c; color:white; position:relative; left:10px; ">
-                            </span>
-                            <button class="btn btn-secondary btn-sm" style="background-color:#524e4d; border:none; opacity:0.3;" type="submit"><i class="fas fa-search" style="font-size:1.5em; background-color:#524e4d;"></i></input>
+                <div class="dropdown">
+                    <a class="pl-3" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:#a9a9a9;opacity:0.6;font-size:0.7em; ">
+                       <i class="fas fa-search" style="font-size:1.5em; background-color:white;"> キーワードで探す</i>
+                    </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <form method="get" action="{{ route('posts.search') }}" accept-charset="UTF-8" class="dropdown-item" class="form-inline my-2 my-md-0">
+                        <span class="bmd-form-group">
+                            <input name="search" value="" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" style="font-size:0.9em;  color:white; position:relative;">
+                        </span>
+                        <button class="btn btn-secondary btn-sm" style="background-color:#524e4d; border:none; opacity:0.3;" type="submit"><i class="fas fa-search" style="font-size:1.5em;"></i></button>
                         </form>
-                    </ul>
+                        </div>
+                    </div>
+                    <div class="dropdown">
+                <a class="pl-4" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" style="color:#a9a9a9;opacity:0.6;font-size:0.7em;background-color:white;border:none;" aria-expanded="false">
+                <i class="fas fa-th" style="font-size:1.5em; background-color:white;"> カテゴリから探す</i>
+                </a>
+
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <a class="dropdown-item" href="{{ route('product.index') }}">技術</a>
+                    <a class="dropdown-item" href="/?category_id=2">悩み・相談</a>
+                    <a class="dropdown-item" href="/?category_id=3">集客・経営</a>
+                    <a class="dropdown-item" href="/?category_id=4">海外美容師</a>
+                    <a class="dropdown-item" href="/?category_id=5">フリーランス</a>
+                    <a class="dropdown-item" href="/?category_id=6">その他</a>
+                </div>
+                </div>
+               
+
+                    @if (Auth::check())
                     <ul class="navbar-nav ml-auto">
                         <li class="navber-item">
-                            <a href="{{ route('posts.create') }}" class="btn btn-primary"
-                            >
-                                投稿を新規作成する
+                            <a href="{{ route('posts.create') }}" class="btn btn-primary mr-4 mt-2">
+                              レビューを書く
+                            </a>
+                            <a href="{{ route('posts.create') }}" class="btn btn-primary mr-4 mt-2">
+                               コラムを投稿する
                             </a>
                         </li>
-                    </ul>
-                @else
-                @endif
-
-                    <ul class="navbar-nav ml-3">
-                        <!-- Authentication Links -->
-                        @guest
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                        </li>
-                        @if (Route::has('register'))
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                        </li>
-
-                        @endif
-                        @else
                         <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            @if(!empty($post->user->thumbnail))
+                            <a id="navbarDropdown" class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                
+                            @if(isset($post->user->thumbnail))
+
                                 <img src="/storage/user/{{ $post->user->thumbnail }}" alt="" style="width:40px; height:40px; border-radius:50%; position:relative;
                             ">
                             @else
@@ -92,14 +100,32 @@
                                 </form>
                             </div>
                         </li>
-
-                        @endguest
                     </ul>
+                    @else
+                    <ul class="navbar-nav ml-auto">
+
+                        <li class="nav-item mr-2">
+                            <a class="btn btn-outline-dark" href="{{ route('login') }}">ゲストユーザーログイン</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="btn btn-outline-dark" href="{{ route('login') }}">新規登録 / ログイン</a>
+                        </li>  
+                    
+                    </ul>
+                    @endif
+
+
+
                 </div>
+                
             </div>
         </nav>
-
+       
         <main>
+            <div class="container-fluid">
+
+</div>
+
                 @isset($search_result)
                 <h5 class="card-title">{{ $search_result }}</h5>
                 @endisset
