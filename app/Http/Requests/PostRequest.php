@@ -25,9 +25,14 @@ class PostRequest extends FormRequest
     {
         return [
             'title' => 'required|max:255',
-            'content' => 'required',
+            'content' => 'required|max:15000',
             'user_id' => 'required|numeric',
             'category_id' => 'required|numeric',
+            'prefecture_id' => 'required|numeric',
+            'buy_id' => 'required|numeric',
+            'address' => 'required|max:10',
+            'price' => 'required|numeric',
+            'image' => 'nullable|image'
         ];
     }
 }

@@ -13,40 +13,27 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Route::get('/', function () {
-    //return view('welcome');
-//});
+
 
 Auth::routes();
-
 Route::get('/', 'App\Http\Controllers\PostController@index')->name('posts.index');
-
-Route::get('/posts/search', 'App\Http\Controllers\PostController@search')->name('posts.search');
-
+Route::get('/edit', 'App\Http\Controllers\EditController@index')->name('edit.index');
+Route::resource('/users', 'App\Http\Controllers\UserController');
 Route::resource('/posts', 'App\Http\Controllers\PostController')->except(['index']);
 
-Route::resource('/users', 'App\Http\Controllers\UserController');
-Route::resource('/comments', 'App\Http\Controllers\CommentController')->middleware('auth');
+Route::prefix('post')->group(function () {
+    Route::get('/search', 'App\Http\Controllers\PostController@search')->name('posts.search');
+    Route::post('/{post}/favorites', 'App\Http\Controllers\FavoriteController@store')->name('favorites');
+    Route::post('/{post}/unfavorites', 'App\Http\Controllers\FavoriteController@destroy')->name('unfavorites');
+});
 
-Route::get('/edit', 'App\Http\Controllers\EditController@index')->name('edit.index');
-
-Route::get('/user', 'App\Http\Controllers\UserController@index')->name('user.index')->middleware('auth');
-
-
-Route::get('/user/userEditEmail', 'App\Http\Controllers\UserController@userEditEmail')->name('user.userEditEmail')->middleware('auth');
-Route::post('/user/userEditEmail', 'App\Http\Controllers\UserController@userUpdateEmail')->name('user.userUpdateEmail')->middleware('auth');
-Route::get('/user/userEdit', 'App\Http\Controllers\UserController@userEdit')->name('user.userEdit')->middleware('auth');
-Route::post('/user/userEdit', 'App\Http\Controllers\UserController@userUpdate')->name('user.userUpdate')->middleware('auth');
-
-Route::post('posts/{post}/favorites', 'App\Http\Controllers\FavoriteController@store')->name('favorites');
-Route::post('posts/{post}/unfavorites', 'App\Http\Controllers\FavoriteController@destroy')->name('unfavorites');
-
-Route::get('/product', 'App\Http\Controllers\ProductController@index')->name('product.index');
-Route::get('/product/list', 'App\Http\Controllers\ProductController@list');
-Route::post('/product/review', 'App\Http\Controllers\ProductController@review')->name('product.review');
-
-Route::resource('/product', 'App\Http\Controllers\ProductController', ['only' => ['index', 'show']]);
-
-
-
-
+Route::group(['middleware' => ['auth']], function () {
+    Route::resource('/comments', 'App\Http\Controllers\CommentController');
+    Route::get('/user', 'App\Http\Controllers\UserController@index')->name('user.index');
+    Route::get('/user/userEditEmail', 'App\Http\Controllers\UserController@userEditEmail')->name('user.userEditEmail');
+    Route::post('/user/userEditEmail', 'App\Http\Controllers\UserController@userUpdateEmail')->name('user.userUpdateEmail');
+    Route::get('/user/userEdit', 'App\Http\Controllers\UserController@userEdit')->name('user.userEdit');
+    Route::post('/user/userEdit', 'App\Http\Controllers\UserController@userUpdate')->name('user.userUpdate');
+    Route::get('/user/deleteConfirm', 'App\Http\Controllers\UserController@deleteConfirm')->name('user.deleteConfirm');
+    Route::post('/user/deleteConfirm', 'App\Http\Controllers\UserController@delete')->name('user.delete');
+});

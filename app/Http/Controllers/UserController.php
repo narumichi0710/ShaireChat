@@ -18,44 +18,27 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $authUser = Auth::user();
-        $users = User::all();
-        $param = [
-            'authUser' => $authUser,
-            'users' => $users
-        ];
+        $param = ['authUser' => $authUser];
         return view('user.index', $param);
-    }
-
-    public function profile(){
-
-        $authUser = Auth::user();
-        $users = User::all();
-        $param = [
-            'authUser' => $authUser,
-            'users' => $users,
-        ];
-        return view('user.profile', $param );
-
     }
 
     public function show(User $user)
     {
 
-        $user->load('posts');
-
-        return view('user.show', [
-            'user' => $user,
-        ]);
     }
-
 
     public function userEdit(Request $request)
     {
         $authUser = Auth::user();
-        $param = [
-            'authUser' => $authUser,
-        ];
+        $param = ['authUser' => $authUser];
         return view('user.userEdit', $param);
+    }
+
+    public function userEditEmail(Request $request)
+    {
+        $authUser = Auth::user();
+        $param = ['authUser' => $authUser];
+        return view('user.userEditEmail', $param);
     }
 
     public function userUpdate(UserUpdateRequest $request)
@@ -69,11 +52,13 @@ class UserController extends Controller
 
             $param = [
                 'name' => $request->name,
+                'profile' => $request->profile,
                 'thumbnail' => $thumbnailname,
             ];
         } else {
             $param = [
                 'name' => $request->name,
+                'profile' => $request->profile,
             ];
         }
 
@@ -81,27 +66,24 @@ class UserController extends Controller
         return redirect(route('user.index'))->with('success', '保存しました。');
     }
 
-    public function userEditEmail(Request $request)
-    {
-        $authUser = Auth::user();
-        $param = [
-            'authUser' => $authUser,
-        ];
-        return view('user.userEditEmail', $param);
-    }
-
     public function userUpdateEmail(ChangeEmailRequest $request)
     {
-      
        $param = [
                 'email' => $request->email,
             ];
-        
+
         User::where('id', $request->user_id)->update($param);
         return redirect(route('user.index'))->with('success', 'メールアドレスを変更しました。');
     }
 
+    public function deleteConfirm()
+    {
+        return view('user.deleteConfirm');
+    }
 
-
-
+    public function delete()
+    {
+        User::find(Auth::id())->delete();
+        return redirect('/');
+    }
 }

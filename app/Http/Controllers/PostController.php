@@ -5,11 +5,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\PostRequest;
-use Illuminate\Support\MessageBag;
-use InterventionImage;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Post;
-use App\Models\Tag;
+use App\Models\User;
+
 
 class PostController extends Controller
 {
@@ -20,63 +19,52 @@ class PostController extends Controller
      */
     public function index()
     {
-        $user = \Auth::user();
-        $id = Auth::id();
-
+        $authUser = Auth::user();
         $q = \Request::query();
+        $param = ['authUser' => $authUser];
 
         if (isset($q['category_id'])) {
-            $posts = Post::latest()->where('category_id', $q['category_id'])->simplePaginate(9);
-            $posts->load('category', 'user');
+            $posts = Post::latest()->where('category_id', $q['category_id'])->simplePaginate(10);
 
-            $authUser = Auth::user();
-            $param = [
-                'authUser' => $authUser,
-            ];
-            
-            return view('posts.index', [
+            return view('posts.category', [
                 'posts' => $posts, $param,
-                'category_id' => $q['category_id'],
                 'authUser' => $authUser,
-                'user' => $user
-                
             ]);
-        } if (isset($q['tag_name'])) {
-            $posts = Post::latest()->where('content', 'like', "%{$q['tag_name']}%")->simplePaginate(9);
-            $posts->load('category', 'user', 'tags');
 
-            return view('posts.index', [
-                'posts' => $posts,
-                'tag_name' => $q['tag_name']
-            ]);
-        } else {
-            $posts = Post::latest()->simplePaginate(9);
-            $posts->load('category', 'user');
+        } else if (isset($q['prefecture_id'])) {
+            $posts = Post::latest()->where('prefecture_id', $q['prefecture_id'])->simplePaginate(10);
 
-            $authUser = Auth::user();
-            $param = [
-                'authUser' => $authUser,
-            ];
-
-            return view('posts.index', [
+            return view('posts.category', [
                 'posts' => $posts, $param,
-                'user' => $user
+                'authUser' => $authUser,
+            ]);
+
+        } else if (isset($q['buy_id'])) {
+            $posts = Post::latest() ->where('buy_id', $q['buy_id'])->simplePaginate(10);
+
+            return view('posts.category', [
+                'posts' => $posts, $param,
+                'authUser' => $authUser,
             ]);
         }
+        $posts = Post::latest()->simplePaginate(10);
+
+        return view('posts.index', [
+            'posts' => $posts, $param,
+            'authUser' => $authUser
+        ]);
     }
-
-
-
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        return view('posts.create', []);
-    }
+    public function create() {
+        $authUser = Auth::user();
+        $param = ['authUser' => $authUser,];
 
+        return view('posts.create', ['authUser' => $authUser, $param,]);
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -85,45 +73,26 @@ class PostController extends Controller
      */
     public function store(PostRequest $request)
     {
-
-        if ($request->file('image')->isValid()) {
-
+        if ($request->isMethod('post')) {
             $post = new Post;
-            $input = $request->only($post->getFillable());
             $post->user_id = $request->user_id;
             $post->category_id = $request->category_id;
             $post->content = $request->content;
             $post->title = $request->title;
+            $post->prefecture_id = $request->prefecture_id;
+            $post->address = $request->address;
+            $post->price = $request->price;
+            $post->buy_id = $request->buy_id;
 
+        } if ($request->hasFile('image')) {
+            $post->image = $request->file('image');
             $filename = $request->file('image')->store('/public/image');
-
             $post->image = basename($filename);
-
-            preg_match_all('/#([a-zA-Z0-9０-９ぁ-んァ-ヶー一-龠]+)/u', $request->content, $match);
-
-
-            $tags = [];
-
-            foreach ($match[1] as $tag) {
-                $found = Tag::firstOrCreate(['tag_name' => $tag]);
-
-                array_push($tags, $found);
-            }
-
-            $tag_ids = [];
-
-            foreach ($tags as $tag) {
-                    array_push($tag_ids, $tag['id']);
-            }
-
-            $post->save();
-            $post->tags()->attach($tag_ids);
-
         }
+            $post->save();
 
         return redirect('/');
     }
-
     /**
      * Display the specified resource.
      *
@@ -132,27 +101,31 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        $post->load('category', 'user', 'comments.user',);
         $authUser = Auth::user();
-        $param = [
-            'authUser' => $authUser,
-        ];
+        $param = ['authUser' => $authUser,];
 
+        if (Auth::check()){
         return view('posts.show', [
-            'post' => $post, $param
-
+            'post' => $post, $param,
+            'authUser' => $authUser,
         ]);
+        } else {
+        return redirect(route('login'))->with('success', '投稿を見るにはログインが必要です。');
+        }
     }
-
     /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($post_id)
     {
-        //
+        $post = Post::findOrFail($post_id);
+
+        return view('posts.edit', [
+            'post' => $post,
+        ]);
     }
 
     /**
@@ -162,9 +135,15 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($post_id,Request $request)
     {
-        //
+        $post = Post::findOrFail($post_id);
+        $post->user_id = $request->user_id;
+        $post->content = $request->content;
+        $post->title = $request->title;
+        $post->save();
+
+        return redirect()->route('posts.show', ['post' => $post]);with('success', '保存しました。');
     }
 
     /**
@@ -173,23 +152,100 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($post_id)
     {
-        //
+        $post = Post::findOrFail($post_id);
+
+        \DB::transaction(function () use ($post) {
+            $post->comments()->delete();
+            $post->delete();
+        });
+
+        return redirect('/');
     }
+
     public function search(Request $request)
     {
 
-        $posts = Post::where('title', 'like', "%{$request->search}%")
-            ->orWhere('content', 'like', "%{$request->search}%")
-            ->paginate(5);
+        $authUser = Auth::user();
+        $param = [
+            'authUser' => $authUser,
+        ];
+        $q = \Request::query();
 
-        $search_result = $request->search . 'の検索結果' . $posts->total() . '件';
+        if (isset($q['buy_id']) && isset($q['prefecture_id']) && isset($q['category_id']) && isset($request->search)) {
+            $posts = Post::latest()
+            ->where('buy_id', $q['buy_id'])->where('prefecture_id', $q['prefecture_id'])
+            ->where('category_id', $q['category_id'])->where('title', 'like', "%{$request->search}%")
+            ->simplePaginate(10);
 
-        return view('posts.index', [
-            'posts' => $posts,
-            'search_results' => $search_result,
-            'search_query' => $request->search
+        } elseif (isset($q['prefecture_id']) && isset($q['category_id']) && isset($request->search)) {
+            $posts = Post::latest()
+            ->where('prefecture_id', $q['prefecture_id'])
+            ->where('category_id', $q['category_id'])->where('title', 'like', "%{$request->search}%")
+            ->simplePaginate(10);
+
+        } elseif (isset($q['buy_id']) && isset($q['prefecture_id']) && isset($request->search)) {
+            $posts = Post::latest()
+            ->where('buy_id', $q['buy_id'])->where('prefecture_id', $q['prefecture_id'])
+            ->where('title', 'like', "%{$request->search}%")
+            ->simplePaginate(10);
+
+        } elseif (isset($q['buy_id']) && isset($q['category_id']) && isset($request->search)) {
+            $posts = Post::latest()
+            ->where('buy_id', $q['buy_id'])->where('category_id', $q['category_id'])
+            ->where('title', 'like', "%{$request->search}%")->simplePaginate(10);
+
+        } elseif (isset($q['buy_id']) && isset($q['prefecture_id']) && isset($q['category_id'])) {
+            $posts = Post::latest()
+            ->where('buy_id', $q['buy_id'])->where('prefecture_id', $q['prefecture_id'])
+            ->where('category_id', $q['category_id'])->simplePaginate(10);
+
+        } elseif (isset($q['prefecture_id']) && isset($request->search)) {
+            $posts = Post::latest()->where('prefecture_id', $q['prefecture_id'])
+            ->where('title', 'like', "%{$request->search}%")->simplePaginate(10);
+
+        } elseif (isset($q['buy_id']) && isset($request->search)) {
+            $posts = Post::latest()->where('buy_id', $q['buy_id'])->where('title', 'like', "%{$request->search}%")->simplePaginate(10);
+
+        } elseif (isset($q['category_id']) && isset($request->search)) {
+            $posts = Post::latest()->where('category_id', $q['category_id'])->where('title', 'like', "%{$request->search}%")->simplePaginate(10);
+
+        }elseif (isset($q['prefecture_id']) && isset($q['buy_id'])) {
+            $posts = Post::latest()->where('prefecture_id', $q['prefecture_id'])->where('buy_id', $q['buy_id'])->simplePaginate(10);
+
+        } elseif (isset($q['category_id']) && isset($q['buy_id'])) {
+            $posts = Post::latest()->where('category_id', $q['category_id'])->where('buy_id', $q['buy_id'])->simplePaginate(10);
+
+        } elseif (isset($q['prefecture_id']) && isset($request->search)) {
+            $posts = Post::latest()->where('prefecture_id', $q['prefecture_id'])->where('title', 'like', "%{$request->search}%")->simplePaginate(10);
+
+        } elseif (isset($q['prefecture_id']) && isset($q['category_id'])) {
+            $posts = Post::latest()->where('prefecture_id', $q['prefecture_id'])->where('category_id', $q['category_id'])->simplePaginate(10);
+
+        } elseif (isset($request->search)) {
+            $posts = Post::where('title', 'like', "%{$request->search}%")->orWhere('content', 'like', "%{$request->search}%")->simplepaginate(10);
+
+        } elseif (isset($q['category_id'])) {
+            $posts = Post::latest()->where('category_id', $q['category_id'])->simplePaginate(10);
+
+        } elseif (isset($q['prefecture_id'])) {
+            $posts = Post::latest()->where('prefecture_id', $q['prefecture_id'])->simplePaginate(10);
+
+        } elseif (isset($q['buy_id'])) {
+            $posts = Post::latest()->where('buy_id', $q['buy_id'])->simplePaginate(10);
+
+        } else {
+            $posts = Post::latest()->simplePaginate(10);
+        }
+
+        $search_result = $request->search.'の検索結果　'.$posts->count().'件';
+
+        return view('posts.search', [
+            'authUser' => $authUser,
+            'posts' => $posts, $param,
+            'search_result' => $search_result,
         ]);
-    }
+
+}
 }

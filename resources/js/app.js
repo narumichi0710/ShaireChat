@@ -4,6 +4,8 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
+import StarRating from 'vue-star-rating';
+
 require('./bootstrap');
 
 window.Vue = require('vue');
@@ -20,6 +22,7 @@ window.Vue = require('vue');
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('star-rating', StarRating);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -29,4 +32,13 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 
 const app = new Vue({
     el: '#app',
+    delimiters: ["<%","%>"] //変数シンタックスを変更(Vue側のテンプレートでの変数展開シンタックスを変更することが可能。)
 });
+
+
+let star = new Vue({
+    el: '#star', // idがstarの要素をとる
+    data: {
+    rating: 0 // ratingのデフォルト値は1とする
+    }
+    });

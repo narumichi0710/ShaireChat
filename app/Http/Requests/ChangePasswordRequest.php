@@ -8,7 +8,6 @@ use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
-
 class ChangePasswordRequest extends FormRequest
 {
     /**
@@ -30,10 +29,9 @@ class ChangePasswordRequest extends FormRequest
     {
         return [
             'current_password' => ['required', 'string', 'min:8'],
-            'password' => [ 'required', 'string', 'min:8', 'confirmed']
+            'password' => [ 'required', 'string', 'min:8' ]
         ];
     }
-
     public function withValidator(Validator $validator)
     {
         $validator->after(function ($validator) {

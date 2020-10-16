@@ -22,23 +22,30 @@ class UserUpdateRequest extends FormRequest
      * @return array
      */
     public function rules()
-    {   
+    {
+
         return [
             'user_id' => 'integer|required',
-            'name' => 'required|string|max:20'
+            'name' => 'required|string|max:20',
+            'profile' => 'nullable|string|max:1500',
+
         ];
+
     }
 
     public function messages(){
-       
+
+
         return [
             'user_id.integer' => 'SystemError:システム管理者にお問い合わせください',
             'user_id.required' => 'SystemError:システム管理者にお問い合わせください',
             'name.required' => 'ユーザー名が未入力です',
+
         ];
 
-        
 
-    }   
-    
+
+
+    }
+
 }

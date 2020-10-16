@@ -1,7 +1,29 @@
 @import url(https://fonts.googleapis.com/css?family=Nunito);
 
+/*!
+ * Bootstrap v4.5.2 (https://getbootstrap.com/)
+ * Copyright 2011-2020 The Bootstrap Authors
+ * Copyright 2011-2020 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+ */
 
-/*カテゴリー*/
+
+
+
+#navFormControl {
+    margin-top:1px;
+    border-radius:4px;
+    border:none;
+}
+#navFormControlButton {
+    border-radius:25px;
+    padding:12px;
+    width:100%;
+    background-color:white;
+    color:black;
+}
+
+
 .products_gallery {
     display: flex;
     flex-wrap: wrap;
@@ -18,7 +40,7 @@
 body {
     font-family: "Open Sans", Arial, sans-serif;
     min-height: 100vh;
-    background-color: #fafafa;
+    background-color: #EBEBEB;
     color: #262626;
     padding-bottom: 3rem;
 }
@@ -66,6 +88,18 @@ img {
     padding: 5rem 0;
 }
 
+.profile-info{
+
+    width:100%;
+}
+.profile-info td{
+    padding:5px 0;
+}
+
+.profile-info-yen{
+
+    font-size:1.4em;
+}
 .profile::after {
     content: "";
     display: block;
@@ -145,6 +179,8 @@ img {
     font-weight: 600;
 }
 
+
+
 /* Gallery Section */
 
 .gallery {
@@ -159,16 +195,16 @@ img {
     position: relative;
     flex: 1 0 22rem;
     margin: 1rem;
-    color: #fff;    
+    color: #fff;
     cursor: pointer;
     background-size: 100px;
     background-color:black;
 
 }
 
-.gallery-item1 {
+.gallery-item-each {
     width:100%;
-    height:25%;
+    height:18%;
     background-color: rgba(0, 0, 0, 0.6);
     bottom:0;
     background-size: cover;
@@ -176,54 +212,19 @@ img {
     position:absolute;
 }
 
-
-.gallery-item p{
-    position:absolute;
-    top:5%;
-    left:2%;
-    margin:0;
-    padding:1%; 
-    
-   
+.gallery-item-info {
+    display:flex;
+    width:100%;
+    padding:5px;
 }
 
 .gallery-item:hover .gallery-item-info,
 .gallery-item:focus .gallery-item-info {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
     top: 0;
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.3);
-}
-
-.gallery-item-info {
-    display: none;
-}
-
-.gallery-item-info li {
-    display: inline-block;
-    font-size: 1.7rem;
-    font-weight: 600;
-}
-
-.gallery-item-likes {
-    margin-right: 2.2rem;
-}
-
-.gallery-item-type {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    font-size: 2.5rem;
-    text-shadow: 0.2rem 0.2rem 0.2rem rgba(0, 0, 0, 0.1);
-}
-
-.fa-clone,
-.fa-comment {
-    transform: rotateY(180deg);
 }
 
 .gallery-image {
@@ -231,17 +232,44 @@ img {
     height: 100%;
     object-fit: cover;
 }
+.gallery-category {
+    border-top:1px solid lightgray;
+}
 
-/* Loader */
+.gallery-category-item{
+   border-right:1px solid lightgray;
+   border-left:1px solid lightgray;
+   border-bottom:1px solid lightgray;
 
-.loader {
-    width: 5rem;
-    height: 5rem;
-    border: 0.6rem solid #999;
-    border-bottom-color: transparent;
-    border-radius: 50%;
-    margin: 0 auto;
-    animation: loader 500ms linear infinite;
+}
+
+.category {
+    display: flex;
+	flex-wrap: wrap;
+}
+.category li{
+    list-style: none;
+    opacity:0.8;
+    border:1px solid gray;
+    text-align:center;
+    font-size:0.8em;
+    padding:10px;
+    margin:5px;
+    width :80%;
+
+}
+
+.category a {
+
+    color: black;
+    font-size:1.2em;
+    padding:10px;
+}
+
+
+#header {
+    border:none;
+
 }
 
 /* Media Query */
@@ -326,20 +354,9 @@ img {
     }
 }
 
-/* Spinner Animation */
-
-@keyframes loader {
-    to {
-        transform: rotate(360deg);
-    }
-}
-
 /*
-
 The following code will only run if your browser supports CSS grid.
-
-Remove or comment-out the code block below to see how the browser will fall-back to flexbox & floated styling. 
-
+Remove or comment-out the code block below to see how the browser will fall-back to flexbox & floated styling.
 */
 
 @supports (display: grid) {
@@ -351,27 +368,25 @@ Remove or comment-out the code block below to see how the browser will fall-back
         align-items: center;
     }
 
-    .profile-image {
-        grid-row: 1 / -1;
-    }
-    .products_gallery {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
-        grid-gap: 10px;
-    }
 
     .gallery {
+        width:90%;
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(22rem, 1fr));
-        grid-gap: 2rem;
+        grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+        background-color:white;
+        grid-gap: 25px;
+        padding:25px;
+        margin: 0 auto;
+        border-radius:10px;
     }
+
 
     .profile-image,
     .profile-user-settings,
     .profile-stats,
     .profile-bio,
-    .gallery-item,
-    .gallery
+    .gallery-item
+
      {
         width: auto;
         margin: 0;
@@ -409,7 +424,39 @@ Remove or comment-out the code block below to see how the browser will fall-back
     }
 }
 
- 
+
+footer {
+    position:absolute;
+    background-color:#e9ecef;
+    width:100%;
+    padding:50px 0 50px 0px;
+   margin-top:300px;
+}
+.footer-item {
+    display: flex;
+	flex-wrap: wrap;
+}
+
+.footer-item a {
+    color: black;
+    font-size:0.8em;
+    padding:5px;
+
+}
+.footer-item li{
+    list-style:none;
+    top:0;
+}
+
+.footer-title {
+    border-radius:25px;
+    background-color:#e8e8e8;
+    text-align:center;
+    padding:2px 0px;
+    width:60px;
+    font-size:0.8em;
+}
+
 :root {
   --blue: #3490dc;
   --indigo: #6574cd;
@@ -441,7 +488,11 @@ Remove or comment-out the code block below to see how the browser will fall-back
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
-
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 
 html {
   font-family: sans-serif;
@@ -463,6 +514,7 @@ section {
   display: block;
 }
 
+
 body {
   margin: 0;
   font-family: "Nunito", sans-serif;
@@ -471,10 +523,8 @@ body {
   line-height: 1.6;
   color: #212529;
   text-align: left;
-  background-color: #f8fafc;
+  background-color:white;
 }
-
-
 
 [tabindex="-1"]:focus:not(:focus-visible) {
   outline: 0 !important;
@@ -603,7 +653,6 @@ pre {
   margin-top: 0;
   margin-bottom: 1rem;
   overflow: auto;
-
 }
 
 figure {
@@ -900,7 +949,6 @@ mark,
   color: #6c757d;
 }
 
-
 .blockquote-footer::before {
   content: "\2014\A0";
 }
@@ -981,56 +1029,66 @@ pre code {
 .container-md,
 .container-sm {
   width: 100%;
-  padding-right: 5px;
-  padding-left: 5px;
+  padding-right: 15px;
+  padding-left: 15px;
   margin-right: auto;
   margin-left: auto;
-
 }
-
 
 @media (min-width: 576px) {
   .container-sm,
   .container {
     max-width: 540px;
   }
-
 }
-
-@media (min-width: 300px) {
-    #mannaka{
-        text-align:center;
-    }
-}
-
 
 @media (min-width: 768px) {
-    
   .container-md,
   .container-sm,
   .container {
     max-width: 720px;
   }
+.category li{
+    width:18%;
+    }
+    .yen {
+        display:flex;
+       padding:10px;
+      }
+      #price {
+        width:40%;
+        margin-left:14px;
 
-  #email,#name,#password,#password-confirm{
-    font-size:1.1rem;
-    width:150%;
-  }
-  #mannaka{
-    right:18px;
-  }
-  #mannakabotan{
-    right:50px;
-   
-  }
-  #mannaka_a{
-    text-align:center;
-    right:45px;
-  }
-
+    }
+    .profile-info{
+        margin-top:60px;
+    }
+}
+@media (max-width: 640px) {
+.navber-title{
+    display:flex;
+    position:absolute;
+   left:30px;
+   right:30px;
+   top:50px;
+}
+#nav{
+    padding-bottom:60px;
+}
 }
 
+@media (max-width: 770px) {
+    .yen {
+      display:flex;
+     padding:10px;
+    }
 
+    #price {
+        width:40%;
+        margin-left:20px;
+    }
+
+}
 
 @media (min-width: 992px) {
   .container-lg,
@@ -1039,7 +1097,57 @@ pre code {
   .container {
     max-width: 960px;
   }
+  .nav-button {
+    margin-right:80px;
 }
+
+#navber-item-button2 a
+{
+    visibility: visible;
+}
+#navber-responsive-auth,#navber-responsive{
+    display:none;
+}
+
+}
+@media (min-width: 1200px) {
+
+
+}
+
+@media (max-width: 992px) {
+
+    #nav-icon {
+        display:none;
+    }
+    #navber-item {
+      display:none;
+  }
+
+  #navber-item-button a ,#navber-item-button1 a,#navber-item-button2 a{
+      text-decoration:none;
+      border:none;
+      background-color:white;
+      text-align:center;
+  }
+  #navber-item-button1{
+      text-align:right;
+
+  }
+
+  .nav-button{
+      margin-top:20px;
+
+  }
+    .nav-search,.nav-category, .nav-prefecture{
+    margin-top:5px;
+    }
+    #navber-item-icon{
+        display:none;
+    }
+
+}
+
 
 @media (min-width: 1200px) {
   .container-xl,
@@ -1049,9 +1157,40 @@ pre code {
   .container {
     max-width: 1140px;
   }
-  
+
+
 }
 
+@media (max-width: 1040px) {
+
+  #navber-item {
+      display:none;
+  }
+
+  #navber-responsive, #navber-responsive-auth{
+      text-align:center;
+  }
+  #navber-responsive a, #navber-responsive-auth a {
+      width:70%;
+    font-size:1.3em;
+    color:black;
+  }
+  #navber-responsive-log {
+    text-align:center;
+      margin-top:70px;
+      margin-bottom:5px;
+  }
+  #navber-responsive-reg{
+    text-align:center;
+    margin-top:20px;
+    margin-bottom:30px;
+  }
+  #navber-responsive-log a, #navber-responsive-reg a {
+
+font-size:1.3em;
+  }
+
+  }
 
 .row {
   display: flex;
@@ -1775,7 +1914,7 @@ pre code {
   .offset-md-11 {
     margin-left: 91.6666666667%;
   }
-} 
+}
 
 @media (min-width: 992px) {
   .col-lg {
@@ -1989,7 +2128,6 @@ pre code {
   }
 }
 
-
 @media (min-width: 1200px) {
   .col-xl {
     flex-basis: 0;
@@ -2201,7 +2339,7 @@ pre code {
     margin-left: 91.6666666667%;
   }
 }
- 
+
 .table {
   width: 100%;
   margin-bottom: 1rem;
@@ -2499,6 +2637,18 @@ pre code {
   }
 }
 
+@media (max-width: 767.98px) {
+  .table-responsive-md {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .table-responsive-md > .table-bordered {
+    border: 0;
+  }
+}
 
 @media (max-width: 991.98px) {
   .table-responsive-lg {
@@ -5080,7 +5230,7 @@ input[type=button].btn-block {
   .navbar-expand-md .navbar-nav .dropdown-menu {
     position: absolute;
   }
-  
+
   .navbar-expand-md .navbar-nav .nav-link {
     padding-right: 0.5rem;
     padding-left: 0.5rem;

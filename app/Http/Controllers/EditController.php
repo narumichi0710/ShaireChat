@@ -7,8 +7,6 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\ChangeNameRequest;
 use App\Http\Requests\ChangeEmailRequest;
 
-
-
 class EditController extends Controller
 {
     public function __construct()

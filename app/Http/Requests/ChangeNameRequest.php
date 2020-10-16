@@ -26,7 +26,7 @@ class ChangeNameRequest extends FormRequest
      * @return array
      */
     public function rules()
-    {   
+    {
         return [
             'user_id' => 'integer|required',
             'name' => 'required','string', 'max:255'
@@ -34,13 +34,13 @@ class ChangeNameRequest extends FormRequest
     }
 
     public function messages(){
-       
+
         return [
             'user_id.integer' => 'SystemError:システム管理者にお問い合わせください',
             'user_id.required' => 'SystemError:システム管理者にお問い合わせください',
             'name.required' => 'ユーザー名が未入力です',
         ];
 
-    }   
-    
+    }
+
 }

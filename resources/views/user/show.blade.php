@@ -5,14 +5,13 @@
 <div class="container pt-2">
 <div class="row justify-content-center">
 <div class="col-md-8">
-<div class="card-header">{{ $user->name }}の投稿</div>
+<div class="card-header" id="header">{{ $user->name }}の投稿</div>
 <div class="card-body">
     @if (session('status'))
     <div class="alert alert-success" role="alert">
         {{ session('status') }}
     </div>
     @endif
-
     @foreach($user->posts as $post)
     <div class="card">
         <div class="card-body">
@@ -24,7 +23,7 @@
             </h5>
 
                 <h5 class="card-title">
-                by <a href="{{ route('users.show', $post->user_id )}}">
+              <a href="{{ route('users.show', $post->user_id )}}">
                     {{ $post->user->name }}</a></h5>
 
             <p class="card-text">{{ $post->content }}</p>

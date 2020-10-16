@@ -37,9 +37,7 @@ class FavoriteController extends Controller
     public function store(Post $post)
     {
         $post->users()->attach(Auth::id());
-
         return redirect()->route('posts.index');
-
     }
 
     /**
@@ -50,7 +48,7 @@ class FavoriteController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**
