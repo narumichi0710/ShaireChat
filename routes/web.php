@@ -20,6 +20,7 @@ Route::get('/', 'App\Http\Controllers\PostController@index')->name('posts.index'
 Route::get('/edit', 'App\Http\Controllers\EditController@index')->name('edit.index');
 Route::resource('/users', 'App\Http\Controllers\UserController');
 Route::resource('/posts', 'App\Http\Controllers\PostController')->except(['index']);
+Route::get('/user/show', 'App\Http\Controllers\UserController@show')->name('users.show');
 
 Route::prefix('post')->group(function () {
     Route::get('/search', 'App\Http\Controllers\PostController@search')->name('posts.search');
@@ -29,7 +30,8 @@ Route::prefix('post')->group(function () {
 
 Route::group(['middleware' => ['auth']], function () {
     Route::resource('/comments', 'App\Http\Controllers\CommentController');
-    Route::get('/user', 'App\Http\Controllers\UserController@index')->name('user.index');
+    Route::get('/user', 'App\Http\Controllers\UserController@index')->name('users.index');
+    Route::get('/user', 'App\Http\Controllers\UserController@profile')->name('users.profile');
     Route::get('/user/userEditEmail', 'App\Http\Controllers\UserController@userEditEmail')->name('user.userEditEmail');
     Route::post('/user/userEditEmail', 'App\Http\Controllers\UserController@userUpdateEmail')->name('user.userUpdateEmail');
     Route::get('/user/userEdit', 'App\Http\Controllers\UserController@userEdit')->name('user.userEdit');

@@ -20,7 +20,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','thumbnail','profile'
+        'name', 'email', 'password','thumbnail','profile', 'post_id'
     ];
 
     /**
@@ -45,5 +45,14 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\Post', 'user_id', 'id',);
     }
+
+    public function favorites()
+    {
+        return $this->belongsToMany('App\Models\Post')->withTimestamps();
+    }
+
+
+
+
 
 }

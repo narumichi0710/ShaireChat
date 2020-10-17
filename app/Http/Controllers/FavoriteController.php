@@ -15,7 +15,6 @@ class FavoriteController extends Controller
      */
     public function index()
     {
-        $posts = Post::orderBy('post_user_id.id', 'desc')->where('post_user_id.id', 'hogehoge')->simplePaginate(5);
     }
 
     /**
@@ -25,7 +24,7 @@ class FavoriteController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -37,8 +36,13 @@ class FavoriteController extends Controller
     public function store(Post $post)
     {
         $post->users()->attach(Auth::id());
+        
         return redirect()->route('posts.index');
     }
+
+
+
+
 
     /**
      * Display the specified resource.
@@ -48,7 +52,7 @@ class FavoriteController extends Controller
      */
     public function show($id)
     {
-        
+
     }
 
     /**
@@ -84,7 +88,6 @@ class FavoriteController extends Controller
     public function destroy(Post $post)
     {
         $post->users()->detach(Auth::id());
-
         return redirect()->route('posts.index');
     }
 }

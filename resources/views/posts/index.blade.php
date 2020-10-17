@@ -94,7 +94,7 @@
     <div class="container pt-4">
         <div class="row justify-content-between m-auto" style="border-bottom:1px solid lightgray; width:95%;">
             <h4 class="pb-3">新着情報</h4>
-            <p class=""><a href="/posts/search?buy_id=&prefecture_id=&category_id=&search=">新着情報をもっと見る <i class="fas fa-angle-right" style="font-size:1.1em;"></i></a></p>
+            <p><a href="/post/search?">新着情報をもっと見る <i class="fas fa-angle-right" style="font-size:1.1em;"></i></a></p>
         </div>
         <div class="gallery">
             @foreach($posts as $post)
@@ -136,11 +136,13 @@
 
                     </div>
                 </div>
-                @if(isset($post->image))
-                <img src="{{ asset('storage/image/'.$post->image) }}" alt="" class="gallery-image">
-                @else
-                <img src="{{ asset('storage/image/noimage.jpg') }}" alt="" class="gallery-image">
-                @endif
+                <a href="{{ route('posts.show', $post->id) }}">
+                    @if(isset($post->image))
+                    <img src="{{ asset('storage/image/'.$post->image) }}" alt="" class="gallery-image">
+                    @else
+                    <img src="{{ asset('storage/image/noimage.jpg') }}" alt="" class="gallery-image">
+                    @endif
+                </a>
             </div>
             @endif
             @endforeach
@@ -163,11 +165,13 @@
 
                     </div>
                 </div>
-                @if(isset($post->image))
-                <img src="{{ asset('storage/image/'.$post->image) }}" alt="" class="gallery-image">
-                @else
-                <img src="{{ asset('storage/image/noimage.jpg') }}" alt="" class="gallery-image">
-                @endif
+                <a href="{{ route('posts.show', $post->id) }}">
+                    @if(isset($post->image))
+                    <img src="{{ asset('storage/image/'.$post->image) }}" alt="" class="gallery-image">
+                    @else
+                    <img src="{{ asset('storage/image/noimage.jpg') }}" alt="" class="gallery-image">
+                    @endif
+                </a>
             </div>
             @endif
             @endforeach
@@ -189,11 +193,13 @@
                         <div>{{ $post->price }}円</div>
                     </div>
                 </div>
-                @if(isset($post->image))
-                <img src="{{ asset('storage/image/'.$post->image) }}" alt="" class="gallery-image">
-                @else
-                <img src="{{ asset('storage/image/noimage.jpg') }}" alt="" class="gallery-image">
-                @endif
+                <a href="{{ route('posts.show', $post->id) }}">
+                    @if(isset($post->image))
+                    <img src="{{ asset('storage/image/'.$post->image) }}" alt="" class="gallery-image">
+                    @else
+                    <img src="{{ asset('storage/image/noimage.jpg') }}" alt="" class="gallery-image">
+                    @endif
+                </a>
             </div>
             @endif
             @endforeach
@@ -215,11 +221,13 @@
                         <div>{{ $post->price }}円</div>
                     </div>
                 </div>
-                @if(isset($post->image))
-                <img src="{{ asset('storage/image/'.$post->image) }}" alt="" class="gallery-image">
-                @else
-                <img src="{{ asset('storage/image/noimage.jpg') }}" alt="" class="gallery-image">
-                @endif
+                <a href="{{ route('posts.show', $post->id) }}">
+                    @if(isset($post->image))
+                    <img src="{{ asset('storage/image/'.$post->image) }}" alt="" class="gallery-image">
+                    @else
+                    <img src="{{ asset('storage/image/noimage.jpg') }}" alt="" class="gallery-image">
+                    @endif
+                </a>
             </div>
             @endif
             @endforeach

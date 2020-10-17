@@ -48,7 +48,6 @@ class PostController extends Controller
             ]);
         }
         $posts = Post::latest()->simplePaginate(10);
-
         return view('posts.index', [
             'posts' => $posts, $param,
             'authUser' => $authUser
@@ -89,6 +88,7 @@ class PostController extends Controller
             $filename = $request->file('image')->store('/public/image');
             $post->image = basename($filename);
         }
+
             $post->save();
 
         return redirect('/');
@@ -238,9 +238,7 @@ class PostController extends Controller
         } else {
             $posts = Post::latest()->simplePaginate(10);
         }
-
-        $search_result = $request->search.'の検索結果　'.$posts->count().'件';
-
+        $search_result = '検索結果　'.$posts->count().'件';
         return view('posts.search', [
             'authUser' => $authUser,
             'posts' => $posts, $param,

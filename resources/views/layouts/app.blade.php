@@ -60,14 +60,13 @@
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                     <form method="get" action="{{ route('posts.search') }}" accept-charset="UTF-8" class="dropdown-item" class="form-inline my-2 my-md-0">
                                         <span class="form-group">
-                                            <input name="search" value="" type="text" class="form-control" type="text" placeholder="Search" aria-label="Search" style="font-size:0.9em;background-color:white;">
+                                            <input name="search" value="" type="text" class="form-control" type="text">
                                             <button type="submit" style="border:none;background-color:white;"><i class="fas fa-search" style="opacity:0.3;position:absolute;display:flex;right:33px;top:22px;"></i></button>
                                             <input name="prefecture_id" style="display:none;">
-                                            </select>
-                                            <select class="form-control" id="navFormControl" name="category_id" style="display:none;">
+                                            <select name="category_id" style="display:none;">
                                                 <option value="" style="display:none;"></option>
                                             </select>
-                                            <select class="form-control" id="navFormControl" name="buy_id" style="display:none;">
+                                            <select name="buy_id" style="display:none;">
                                                 <option value="" style="display:none;"></option>
                                             </select>
                                         </span>
@@ -156,6 +155,7 @@
                             @endif
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item pt-2" href="{{ route('users.profile') }}">マイページ</a>
                             <a class="dropdown-item pt-2" href="{{ route('users.index') }}">設定</a>
                             <a class="dropdown-item pt-2 pb-2" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

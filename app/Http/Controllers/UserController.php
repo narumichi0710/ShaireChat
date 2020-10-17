@@ -11,7 +11,8 @@ use Illuminate\Support\Facades\Auth;
 use Validator;
 use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Support\Facades\Storage;
-
+use App\Models\Post;
+use App\Models\PostUser;
 
 class UserController extends Controller
 {
@@ -19,26 +20,42 @@ class UserController extends Controller
     {
         $authUser = Auth::user();
         $param = ['authUser' => $authUser];
-        return view('user.index', $param);
+        return view('users.index', $param);
+    }
+    public function show()
+    {
+        $authUser = Auth::user();
+        $param = ['authUser' => $authUser];
+        return view('users.show', $param);
     }
 
-    public function show(User $user)
+    public function profile()
     {
+        $authUser = Auth::user();
+        $param = [
+            'authUser' => $authUser,
+        ];
+        $posts = Post::latest()->simplePaginate(10);
 
+        return view('users.profile', [
+            'posts' => $posts, $param,
+            'authUser' => $authUser
+        ]);
     }
 
     public function userEdit(Request $request)
     {
         $authUser = Auth::user();
+
         $param = ['authUser' => $authUser];
-        return view('user.userEdit', $param);
+        return view('users.userEdit', $param,);
     }
 
     public function userEditEmail(Request $request)
     {
         $authUser = Auth::user();
         $param = ['authUser' => $authUser];
-        return view('user.userEditEmail', $param);
+        return view('users.userEditEmail', $param);
     }
 
     public function userUpdate(UserUpdateRequest $request)
@@ -63,7 +80,7 @@ class UserController extends Controller
         }
 
         User::where('id', $request->user_id)->update($param);
-        return redirect(route('user.index'))->with('success', '保存しました。');
+        return redirect(route('users.index'))->with('success', '保存しました。');
     }
 
     public function userUpdateEmail(ChangeEmailRequest $request)
@@ -71,14 +88,13 @@ class UserController extends Controller
        $param = [
                 'email' => $request->email,
             ];
-
         User::where('id', $request->user_id)->update($param);
-        return redirect(route('user.index'))->with('success', 'メールアドレスを変更しました。');
+        return redirect(route('users.index'))->with('success', 'メールアドレスを変更しました。');
     }
 
     public function deleteConfirm()
     {
-        return view('user.deleteConfirm');
+        return view('users.deleteConfirm');
     }
 
     public function delete()

@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
     protected $fillable = [
-        'user_id', 'category_id', 'content', 'title', 'prefecture_id','address','price','profile','buy_id'
+        'user_id', 'category_id', 'content', 'title', 'prefecture_id','address','price','profile','buy_id','post_id'
     ];
 
     public function posts()
@@ -41,7 +41,7 @@ class Post extends Model
     {
         return $this->hasMany(\App\Models\Comment::class, 'post_id', 'id');
     }
-    
+
     public function users()
     {
         return $this->belongsToMany('App\Models\User')->withTimestamps();

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddStarsTable extends Migration
+class CreateFavoriteTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,13 @@ class AddStarsTable extends Migration
      */
     public function up()
     {
-        Schema::table('comments', function (Blueprint $table) {
-            $table->decimal('stars', 5,2);
+        Schema::create('favorite', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('favorite_name')->nullable();
+            $table->timestamps();
         });
     }
+
     /**
      * Reverse the migrations.
      *
@@ -24,6 +27,6 @@ class AddStarsTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('favorite');
     }
 }

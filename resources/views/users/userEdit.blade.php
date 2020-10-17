@@ -14,17 +14,21 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-4">
-                            @if(!empty($authUser->thumbnail))
                             <div class="pt-2 pb-4">
+                            @if(!empty($authUser->thumbnail))
                                 <img src="/storage/user/{{ $authUser->thumbnail }}" alt="" style="width:100%; max-width:150px;">
+                            @else
+                                <img src="/storage/image/icon.jpg" style="width:100%; max-width:150px;">
+                            @endif
                                 <small>現在のプロフィール画像</small>
+
                             </div>
 
-                            @endif
+
                         </div>
                         <div class="col-md-8">
                             <form method="post" action="{{ route('user.userUpdate') }}" enctype="multipart/form-data">
-                                {{ csrf_field() }}
+                                @csrf
                                 <div class="form-group">
                                     <label class="col-form-label text-md-right">ファイルを選択する</label>
                                     <div class="custom-file">
