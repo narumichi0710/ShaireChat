@@ -5,7 +5,8 @@
  
  <img width="1262" alt="Screen Shot 0002-10-20 at 19 51 33" src="https://user-images.githubusercontent.com/65114797/96578017-7d25d280-130f-11eb-982c-d7a086fb7e5c.png">
 <br>
-<img width="459" alt="Screen Shot 0002-10-20 at 19 59 19" src="https://user-images.githubusercontent.com/65114797/96578022-8020c300-130f-11eb-8f16-87f53602dd2e.png">
+
+<img width="456" alt="Screen Shot 0002-10-20 at 19 59 19" src="https://user-images.githubusercontent.com/65114797/96578895-ea863300-1310-11eb-80c6-887d5fb46ad8.png">
 
  
 # URL
@@ -15,6 +16,7 @@ http://shairechat.com/ <br>
 # 使用技術
 - PHP 7.4.9
 - Laravel 8.2.0
+- Vue.js 4.5.3
 - MySQL 5.7.26
 - Apache
 - AWS
@@ -22,6 +24,7 @@ http://shairechat.com/ <br>
   - EC2
   - RDS
   - Route53
+
 # AWS構成図
 <img width="756" alt="Screen Shot 0002-10-20 at 19 22 42" src="https://user-images.githubusercontent.com/65114797/96574295-37b2d680-130a-11eb-9c5d-f80e6394f843.png">
 
