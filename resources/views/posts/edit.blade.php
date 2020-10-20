@@ -42,9 +42,7 @@
                         <div class="form-group col-md-12">
                             販売方法 :
                             @if(!empty($post->buy->buy_name))
-                            <a href="{{ route('posts.index', ['buy_id' => $post->buy_id]) }}">
                                 {{ $post->buy->buy_name }}
-                            </a>
                             @endif
                         </div>
                         <div class="form-group col-md-12">受け取り場所 :
@@ -52,14 +50,11 @@
                             {{ $post->prefecture->prefecture_name }}
                             @endif - {{ $post->address }}
                         </div>
-                        <div class="form-group col-md-12">カテゴリー : <a href="{{ route('posts.index', ['category_id' => $post->category_id]) }}">{{ $post->category->category_name }}　</a></div>
-                        <div class="form-group col-md-6">
-
-                            <div class="form-group col-md-12">価格：{{ $post->price }}円 </div>
-                            <div class="form-group pt-3"> <input class="btn btn-success w-50" type="submit" value="変更する"></div>
-                            <div class=" pt-3"><a href="{{ route('posts.show' , $post->id) }}" class="btn btn-primary">戻る</a></div>
+                        <div class="form-group col-md-12">カテゴリー : {{ $post->category->category_name }}</div>
+                        <div class="form-group col-md-12">価格 : {{ $post->price }}円</div>
+                            <div class="form-group col-md-6 pt-3"> <input class="btn btn-success w-50" type="submit" value="変更する"></div>
+                            <div class="form-group col-md-6 pt-3"><a href="{{ route('posts.show' , $post->id) }}" class="btn btn-primary">戻る</a></div>
                             <input type="hidden" name="user_id" value="{{ Auth::id() }}">
-                        </div>
                     </form>
                 </div>
             </div>
