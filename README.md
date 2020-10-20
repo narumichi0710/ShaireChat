@@ -16,6 +16,7 @@ http: <br>
   - EC2
   - RDS
 # AWS構成図
+<img width="756" alt="Screen Shot 0002-10-20 at 19 22 42" src="https://user-images.githubusercontent.com/65114797/96574295-37b2d680-130a-11eb-9c5d-f80e6394f843.png">
 
 # 機能一覧
 - ユーザー登録、ログイン機能
