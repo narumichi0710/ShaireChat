@@ -1,10 +1,15 @@
-# The-View
+# ShaireChat
  美容室のフリマサイトです。<br>
  使わなくなった物を他の美容室の誰かにあげたり、探している物を無料でもらえたり出来ます。<br>
  レスポンシブ対応しているのでスマホからもご確認いただけます。
  
+ <img width="1262" alt="Screen Shot 0002-10-20 at 19 51 33" src="https://user-images.githubusercontent.com/65114797/96578017-7d25d280-130f-11eb-982c-d7a086fb7e5c.png">
+<br>
+<img width="459" alt="Screen Shot 0002-10-20 at 19 59 19" src="https://user-images.githubusercontent.com/65114797/96578022-8020c300-130f-11eb-8f16-87f53602dd2e.png">
+
+ 
 # URL
-http: <br>
+http://shairechat.com/ <br>
 画面上部のゲストログインボタンから、メールアドレスとパスワードを入力せずにログインできます。
 
 # 使用技術
@@ -13,8 +18,10 @@ http: <br>
 - MySQL 5.7.26
 - Apache
 - AWS
+  - VPC
   - EC2
   - RDS
+  - Route53
 # AWS構成図
 <img width="756" alt="Screen Shot 0002-10-20 at 19 22 42" src="https://user-images.githubusercontent.com/65114797/96574295-37b2d680-130a-11eb-9c5d-f80e6394f843.png">
 
