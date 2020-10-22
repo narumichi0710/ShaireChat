@@ -117,6 +117,9 @@
                             <a class="btn btn-light mt-2" href="{{ route('posts.create') }}">投稿する</a>
                         </li>
                         <li class="nav-item p-2" id="navber-responsive-auth">
+                        <a class="btn btn-light mt-2" href="{{ route('users.profile') }}">マイページ</a>
+                        </li>
+                        <li class="nav-item p-2" id="navber-responsive-auth">
                             <a class="btn btn-light mt-2" href="{{ route('users.index') }}">設定</a>
                         </li>
                         <li class="nav-item p-2 pb-4" id="navber-responsive-auth">
@@ -125,6 +128,7 @@
                                 @csrf
                             </form>
                         </li>
+
                         @else
                         <li class="nav-item" id="navber-responsive-log">
                             <form method="POST" action="{{ route('login') }}">
@@ -132,14 +136,13 @@
                                 <input type="hidden" name="password" value="guestpass">
                                 <input type="hidden" name="email" value="guest@guest.com">
                                 <button type="submit" class="btn btn-light mr-4 mt-2">
-                                    ゲストユーザーログイン
+                                 ゲストユーザーログイン
                                 </button>
                             </form>
 
                         </li>
-
                         <li class="nav-item" id="navber-responsive-reg">
-                            <a class="btn btn-light mr-4 mt-2" href="{{ route('login') }}">新規登録 / ログイン</small></a>
+                            <a class="btn btn-light mr-4 mt-2" href="{{ route('login') }}">新規登録 / ログイン</a>
                         </li>
                         @endif
 
@@ -164,6 +167,8 @@
                         </div>
                     </div>
                     @endif
+                </div>
+            </div>
         </nav>
     </div>
     </div>

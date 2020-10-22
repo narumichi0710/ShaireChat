@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 
-<div class="container pt-4 w-75">
+<div class="container pt-4" style="width:90%;">
         @if(isset($search_result))
         <h5 class="card-title">{{ $search_result }}</h5>
         @endif　　　　　　　
@@ -12,9 +12,9 @@
                     <div class="col-lg-3">
                         <div class="card-body">
                         @if(isset($post->image))
-                    <img src="{{ asset('storage/image/'.$post->image) }}" alt="" class="w-100">
+                    <img src="{{ asset('storage/image/'.$post->image) }}" alt="" class="gallery-image">
                     @else
-                    <img src="{{ asset('storage/image/noimage.jpg') }}" alt="" class="w-100">
+                    <img src="{{ asset('storage/image/noimage.jpg') }}" alt="" class="gallery-image">
                     @endif
                         </div>
                     </div>

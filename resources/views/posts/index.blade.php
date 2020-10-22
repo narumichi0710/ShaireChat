@@ -98,14 +98,13 @@
         </div>
         <div class="gallery">
             @foreach($posts as $post)
-            <div class="gallery-item" tabindex="0">
-                <div class="gallery-item-each">
+            <div class="gallery-item m-auto" tabindex="0">
+                <div class="gallery-item-each m-auto">
                     <div class="gallery-item-info d-flex justify-content-between">
                         <div>@if(!empty($post->prefecture->prefecture_name))
                             {{ $post->prefecture->prefecture_name }}
                             @endif</div>
                         <div>{{ $post->price }}円</div>
-
                     </div>
                 </div>
                 <a href="{{ route('posts.show', $post->id) }}">
@@ -124,10 +123,10 @@
         </div>
         <div class="gallery">
             @foreach($posts as $post)
-            @if($post->buy_id == 1)
-            <div class="gallery-item" tabindex="0">
+            @if($post->buy_id = 1)
+            <div class="gallery-item m-auto" tabindex="0">
 
-                <div class="gallery-item-each">
+                <div class="gallery-item-each m-auto">
                     <div class="gallery-item-info d-flex justify-content-between">
                         <div>@if(!empty($post->prefecture->prefecture_name))
                             {{ $post->prefecture->prefecture_name }}
@@ -153,10 +152,10 @@
         </div>
         <div class="gallery">
             @foreach($posts as $post)
-            @if($post->buy_id == 2)
-            <div class="gallery-item" tabindex="0">
+            @if($post->buy_id = 2)
+            <div class="gallery-item m-auto" tabindex="0">
 
-                <div class="gallery-item-each">
+                <div class="gallery-item-each m-auto">
                     <div class="gallery-item-info d-flex justify-content-between">
                         <div>@if(!empty($post->prefecture->prefecture_name))
                             {{ $post->prefecture->prefecture_name }}
@@ -182,9 +181,9 @@
         </div>
         <div class="gallery">
             @foreach($posts as $post)
-            @if($post->buy_id == 3)
-            <div class="gallery-item" tabindex="0">
-                <div class="gallery-item-each">
+            @if($post->buy_id = 3)
+            <div class="gallery-item m-auto" tabindex="0">
+                <div class="gallery-item-each m-auto">
                     <div class="gallery-item-info d-flex justify-content-between">
                         <div>
                             @if(!empty($post->prefecture->prefecture_name))
@@ -210,9 +209,9 @@
         </div>
         <div class="gallery">
             @foreach($posts as $post)
-            @if($post->buy_id == 4)
-            <div class="gallery-item" tabindex="0">
-                <div class="gallery-item-each">
+            @if($post->buy_id = 4)
+            <div class="gallery-item m-auto" tabindex="0">
+                <div class="gallery-item-each m-auto">
                     <div class="gallery-item-info d-flex justify-content-between">
                         <div>@if(!empty($post->prefecture->prefecture_name))
                             {{ $post->prefecture->prefecture_name }}
@@ -232,10 +231,11 @@
             @endif
             @endforeach
         </div>
-        <div class="row m-auto pt-3" style="border-bottom:1px solid lightgray;width:95%;">
+
+        <div class="row m-auto pt-3" style="border-bottom:1px solid lightgray; width:95%;">
             <h4>カテゴリー</h4>
         </div>
-        <ul class="category mt-3">
+        <ul class="category text-center">
             <li><a href="/?category_id=1">カラー剤</a></li>
             <li><a href="/?category_id=2"> パーマ剤</a></li>
             <li><a href="/?category_id=3">カットウィッグ</a></li>

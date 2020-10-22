@@ -3,8 +3,8 @@
 @section('content')
 
 <div class="container">
-    <div class="row">
-        <div class="col-md-7">
+    <div class="row justify-content-center">
+        <div class="col-md-5">
             <div class="card-body">
                 @if (session('status'))
                 <div class="alert alert-success" role="alert">
@@ -15,7 +15,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-7">
+                        <div class="col-lg-7">
                             <h3 class="card-title">{{ $post->title }}</h3>
                     @if(isset($post->image))
                     <img src="{{ asset('storage/image/'.$post->image) }}" alt="" class="w-100">
@@ -24,13 +24,13 @@
                     @endif
                             <div class="card-text pt-3 pb-3">{{ $post->content }}</div>
                         </div>
-                        <div class="col-md-5">
+                        <div class="col-lg-5">
                             <div class="card-title text-right">
                                 @if($post->users()->where('user_id', Auth::id())->exists())
                                 <form method="POST" action="{{ route('unfavorites', $post)}}" style="padding-left:5px;">
                                     @csrf
                                     <a href="{{ route('posts.show', $post->id) }}" style="padding-left:5px;">
-                                        <input type="submit" value="&#xf004;お気に入り" class="btn btn-outline-danger fas fa-heart">
+                                        <input type="submit" value="&#xf004;お気に入り登録" class="btn btn-outline-dark fas fa-heart" style="color:#68be8d;border-color:#68be8d;">
                                     </a>
                                 </form>
                                 @else
@@ -90,7 +90,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-5 mt-3">
+            <div class="col-md-5">
                 <div class="pt-4">
                     <h3 class="card-header pb-2" id="header">
                         {{ $post->comments->count() }}件のコメント
@@ -109,7 +109,6 @@
                     </div>
                     @endforeach
                 </div>
-
             </div>
         </div>
     </div>

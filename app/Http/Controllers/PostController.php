@@ -47,7 +47,7 @@ class PostController extends Controller
                 'authUser' => $authUser,
             ]);
         }
-        $posts = Post::latest()->simplePaginate(10);
+        $posts = Post::latest()->simplePaginate(12);
         return view('posts.index', [
             'posts' => $posts, $param,
             'authUser' => $authUser

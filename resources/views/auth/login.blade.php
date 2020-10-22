@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container pt-4 mb-4 w-75">
+<div class="container pt-4 mb-4" id="reg">
     <div class="card">
         <div class="card-header text-center">{{ __('Login') }}</div>
-        <div class="card-body w-75 m-auto">
+        <div class="card-body m-auto" id="reg">
         @if (session('success'))
             <div class="alert alert-success">{{ session('success') }}</div>
             @endif
@@ -12,7 +12,7 @@
             <form method="POST" action="{{ route('login') }}">
                 @csrf
                 <div class="form-group pt-4">
-                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" style="font-size:1.2rem;" placeholder="{{ __('E-Mail Address') }}" autofocus>
+                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}"  placeholder="{{ __('E-Mail Address') }}" autofocus>
                     @error('email')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -20,7 +20,7 @@
                     @enderror
                 </div>
                 <div class="form-group">
-                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="{{ __('Password') }}" style="font-size:1.2rem;" autocomplete="current-password">
+                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="{{ __('Password') }}" autocomplete="current-password">
                     @error('password')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -40,7 +40,7 @@
                 </div>
 
                 <div class="form-group">
-                    <button type="submit" class="btn btn-outline-success" style="font-size:1.5rem;width:100%;">
+                    <button type="submit" class="btn btn-outline-success" style="width:100%;">
                         {{ __('Login') }}
                     </button>
                     <div class="text-center">
@@ -57,14 +57,14 @@
                 @csrf
                 <input type="hidden" name="password" value="guestpass">
                 <input type="hidden" name="email" value="guest@guest.com" >
-            <button type="submit" class="btn btn-outline-success" style="font-size:1.5rem;width:100%;">
+            <button type="submit" class="btn btn-outline-success" style="width:100%;">
                 ゲストユーザーログイン
             </button>
             </form>
             </div>
             <div class="mb-2">
             <a href="{{ route('register') }}">
-            <button type="submit" class="btn btn-outline-success" style="font-size:1.5rem;width:100%;">
+            <button type="submit" class="btn btn-outline-success" style="width:100%;">
                 新規登録はこちら
             </button>
             </a>

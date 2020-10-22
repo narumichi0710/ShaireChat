@@ -1,12 +1,204 @@
 @import url(https://fonts.googleapis.com/css?family=Nunito);
 
+
+
+
 /*!
  * Bootstrap v4.5.2 (https://getbootstrap.com/)
  * Copyright 2011-2020 The Bootstrap Authors
  * Copyright 2011-2020 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
- * お疲れ様です
+ *
  */
+ @media (min-width: 436px) {
+ .gallery-image {
+    height:150px;
+    width:150px;
+    object-fit: cover;
+    background-color:white;
+ }
+ .gallery-item-info {
+    display:flex;
+    width:150px;
+    padding:5px;
+}
+}
+
+ @media (min-width: 576px) {
+    .container-sm,
+    .container {
+      max-width: 540px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .container-md,
+    .container-sm,
+    .container {
+      max-width: 720px;
+    }
+  .category li{
+      width:18%;
+      }
+      .yen {
+          display:flex;
+         padding:10px;
+        }
+        #price {
+          width:40%;
+          margin-left:14px;
+
+      }
+      .profile-info{
+          margin-top:60px;
+      }
+  }
+
+  @media (min-width: 992px) {
+    .container-lg,
+    .container-md,
+    .container-sm,
+    .container {
+      max-width: 960px;
+    }
+    .nav-button {
+        margin-right:80px;
+    }
+    #reg {
+        width:70%;
+    }
+    #form {
+        font-size:1.2rem;
+    }
+
+
+
+  }
+
+  @media (min-width: 1200px) {
+    .container-xl,
+    .container-lg,
+    .container-md,
+    .container-sm,
+    .container {
+      max-width: 1140px;
+    }
+  
+    #navber-item-button2 a
+    {
+        visibility: visible;
+    }
+    #navber-responsive-auth,#navber-responsive{
+        display:none;
+    }
+
+
+  }
+  @media (max-width: 435px) {
+
+    .gallery-image {
+        
+        height:200px;
+        width:200px;
+        object-fit: cover;
+        background-color:white;
+    }
+    .gallery-item-info {
+        display:flex;
+        width:200px;
+        padding:5px;
+    }
+
+    
+  }
+
+  @media (max-width: 640px) {
+  .navber-title{
+      display:flex;
+      position:absolute;
+     left:30px;
+     right:30px;
+     top:50px;
+  }
+  #nav{
+      padding-bottom:60px;
+  }
+  }
+
+  @media (max-width: 770px) {
+      .yen {
+        display:flex;
+       padding:10px;
+      }
+
+      #price {
+          width:40%;
+          margin-left:20px;
+      }
+  }
+
+  @media (max-width: 992px) {
+
+      #nav-icon {
+          display:none;
+      }
+      #navber-item {
+        display:none;
+    }
+
+    #navber-item-button a ,#navber-item-button1 a,#navber-item-button2 a{
+        text-decoration:none;
+        border:none;
+        background-color:white;
+        text-align:center;
+    }
+    #navber-item-button1{
+        text-align:right;
+
+    }
+
+    .nav-button{
+        margin-top:20px;
+
+    }
+      .nav-search,.nav-category, .nav-prefecture{
+      margin-top:5px;
+      }
+      #navber-item-icon{
+          display:none;
+      }
+
+  }
+
+  @media (max-width: 1200px) {
+
+    #navber-item {
+        display:none;
+    }
+
+    #navber-responsive, #navber-responsive-auth{
+        text-align:center;
+    }
+    #navber-responsive a, #navber-responsive-auth a {
+        width:70%;
+      font-size:1.3em;
+      color:black;
+    }
+    #navber-responsive-log {
+      text-align:center;
+        margin-top:70px;
+        margin-bottom:5px;
+    }
+    #navber-responsive-reg{
+      text-align:center;
+      margin-top:20px;
+      margin-bottom:30px;
+    }
+    #navber-responsive-log a, #navber-responsive-reg a {
+
+  font-size:1.3em;
+    }
+    }
 
 
 
@@ -65,10 +257,6 @@ img {
     padding: 0;
     cursor: pointer;
 }
-
-
-
-
 
 
 .btn:focus {
@@ -198,14 +386,11 @@ img {
     margin: 1rem;
     color: #fff;
     cursor: pointer;
-    background-size: 100px;
-    background-color:black;
+    background-color:white;
 
 }
 
 .gallery-item-each {
-    width:100%;
-    height:18%;
     background-color: rgba(0, 0, 0, 0.6);
     bottom:0;
     background-size: cover;
@@ -213,26 +398,23 @@ img {
     position:absolute;
 }
 
-.gallery-item-info {
-    display:flex;
-    width:100%;
-    padding:5px;
-}
 
+/*!
 .gallery-item:hover .gallery-item-info,
 .gallery-item:focus .gallery-item-info {
+    width:180px;
     display: flex;
     top: 0;
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.3);
 }
+*/
 
 .gallery-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    margin:0 auto;
 }
+
 .gallery-category {
     border-top:1px solid lightgray;
 }
@@ -246,7 +428,8 @@ img {
 
 .category {
     display: flex;
-	flex-wrap: wrap;
+    flex-wrap: wrap;
+    
 }
 .category li{
     list-style: none;
@@ -256,12 +439,10 @@ img {
     font-size:0.8em;
     padding:10px;
     margin:5px;
-    width :80%;
-
 }
 
 .category a {
-
+    
     color: black;
     font-size:1.2em;
     padding:10px;
@@ -369,18 +550,17 @@ Remove or comment-out the code block below to see how the browser will fall-back
         align-items: center;
     }
 
-
+    @supports (display: grid) {
     .gallery {
         width:90%;
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
         background-color:white;
         grid-gap: 25px;
         padding:25px;
         margin: 0 auto;
         border-radius:10px;
     }
-
 
     .profile-image,
     .profile-user-settings,
@@ -392,6 +572,7 @@ Remove or comment-out the code block below to see how the browser will fall-back
         width: auto;
         margin: 0;
     }
+}
 
     @media (max-width: 40rem) {
         .profile {
@@ -514,7 +695,6 @@ nav,
 section {
   display: block;
 }
-
 
 body {
   margin: 0;
@@ -1035,163 +1215,6 @@ pre code {
   margin-right: auto;
   margin-left: auto;
 }
-
-@media (min-width: 576px) {
-  .container-sm,
-  .container {
-    max-width: 540px;
-  }
-}
-
-@media (min-width: 768px) {
-  .container-md,
-  .container-sm,
-  .container {
-    max-width: 720px;
-  }
-.category li{
-    width:18%;
-    }
-    .yen {
-        display:flex;
-       padding:10px;
-      }
-      #price {
-        width:40%;
-        margin-left:14px;
-
-    }
-    .profile-info{
-        margin-top:60px;
-    }
-}
-@media (max-width: 640px) {
-.navber-title{
-    display:flex;
-    position:absolute;
-   left:30px;
-   right:30px;
-   top:50px;
-}
-#nav{
-    padding-bottom:60px;
-}
-}
-
-@media (max-width: 770px) {
-    .yen {
-      display:flex;
-     padding:10px;
-    }
-
-    #price {
-        width:40%;
-        margin-left:20px;
-    }
-
-}
-
-@media (min-width: 992px) {
-  .container-lg,
-  .container-md,
-  .container-sm,
-  .container {
-    max-width: 960px;
-  }
-  .nav-button {
-    margin-right:80px;
-}
-
-#navber-item-button2 a
-{
-    visibility: visible;
-}
-#navber-responsive-auth,#navber-responsive{
-    display:none;
-}
-
-}
-@media (min-width: 1200px) {
-
-
-}
-
-@media (max-width: 992px) {
-
-    #nav-icon {
-        display:none;
-    }
-    #navber-item {
-      display:none;
-  }
-
-  #navber-item-button a ,#navber-item-button1 a,#navber-item-button2 a{
-      text-decoration:none;
-      border:none;
-      background-color:white;
-      text-align:center;
-  }
-  #navber-item-button1{
-      text-align:right;
-
-  }
-
-  .nav-button{
-      margin-top:20px;
-
-  }
-    .nav-search,.nav-category, .nav-prefecture{
-    margin-top:5px;
-    }
-    #navber-item-icon{
-        display:none;
-    }
-
-}
-
-
-@media (min-width: 1200px) {
-  .container-xl,
-  .container-lg,
-  .container-md,
-  .container-sm,
-  .container {
-    max-width: 1140px;
-  }
-
-
-}
-
-@media (max-width: 1040px) {
-
-  #navber-item {
-      display:none;
-  }
-
-  #navber-responsive, #navber-responsive-auth{
-      text-align:center;
-  }
-  #navber-responsive a, #navber-responsive-auth a {
-      width:70%;
-    font-size:1.3em;
-    color:black;
-  }
-  #navber-responsive-log {
-    text-align:center;
-      margin-top:70px;
-      margin-bottom:5px;
-  }
-  #navber-responsive-reg{
-    text-align:center;
-    margin-top:20px;
-    margin-bottom:30px;
-  }
-  #navber-responsive-log a, #navber-responsive-reg a {
-
-font-size:1.3em;
-  }
-
-  }
 
 .row {
   display: flex;

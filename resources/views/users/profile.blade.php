@@ -9,10 +9,10 @@
     @endif
 
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-4 mt-2">
             <div class="card">
                 <div class="card-body m-auto">
-                    <div class="card-title mt-4">
+                    <div class="card-title">
                         @if(!empty($authUser->thumbnail))
                         <img src="/storage/user/{{ $authUser->thumbnail }}" alt="" class="m-auto" style="width:100%; max-width:200px;">
                         @else
@@ -30,7 +30,7 @@
             </div>
         </div>
 
-        <div class="col-md-8">
+        <div class="col-md-8 mt-3">
             <div class="col-md-12">
                 <div class="card-header" id="header">
                     お気に入りした投稿
@@ -38,14 +38,11 @@
                 @foreach($posts as $post)
                 @if($post->users()->where('user_id', Auth::id())->exists())
                 <div class="card">
-                    <div class="card-body">
+                    <div class="card-body text-left">
                         <div class="card-title text-left">
-
                         <a href="{{ route('posts.show', $post->id )}}">
                             <h5 class="card-title">{{ $post->title }}</h5>
                         </a>
-                        </div>
-                        <div class="row">
                         </div>
                     </div>
                 </div>
