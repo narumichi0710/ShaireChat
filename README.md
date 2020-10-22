@@ -8,31 +8,14 @@
 
 <img width="456" alt="Screen Shot 0002-10-20 at 19 59 19" src="https://user-images.githubusercontent.com/65114797/96578895-ea863300-1310-11eb-80c6-887d5fb46ad8.png">
  
- <img width="1262" alt="Screen Shot 0002-10-20 at 19 51 33" src="https://user-images.githubusercontent.com/65114797/96578017-7d25d280-130f-11eb-982c-d7a086fb7e5c.png">
-<br>
-
-<img width="456" alt="Screen Shot 0002-10-20 at 19 59 19" src="https://user-images.githubusercontent.com/65114797/96578895-ea863300-1310-11eb-80c6-887d5fb46ad8.png">
-
- 
 # URL
-<<<<<<< HEAD
-hhttp://shairechat.com/<br>
-||||||| 3af396b
-http: <br>
-=======
-http://shairechat.com/ <br>
->>>>>>> 436883a28ea2261dab6681509913b48afa69f35f
-画面上部のゲストログインボタンから、メールアドレスとパスワードを入力せずにログインできます。
+http://shairechat.com/<br>
+画面上部のゲストログインボタンからメールアドレスとパスワードを入力せずにログインできます。
 
 # 使用技術
 - PHP 7.4.9
 - Laravel 8.2.0
-<<<<<<< HEAD
 - Vue.js 2.5.17
-||||||| 3af396b
-=======
-- Vue.js 4.5.3
->>>>>>> 436883a28ea2261dab6681509913b48afa69f35f
 - MySQL 5.7.26
 - Apache
 - AWS
