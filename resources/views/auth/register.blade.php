@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container pt-4" id="reg"> 
+<div class="container pt-4" id="reg">
     <div class="card">
         <div class="card-header text-center">{{ __('Register') }}</div>
         <div class="card-body m-auto" id="reg">
@@ -39,7 +39,7 @@
                 </div>
 
                 <div class="form-group pt-4 pb-2">
-                    <button type="submit" class="btn btn-outline-success" style="width:100%;">
+                    <button type="submit" class="btn btn-light" style="width:100%;">
                         {{ __('Register') }}
                     </button>
                 </div>

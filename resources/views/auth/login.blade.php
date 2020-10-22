@@ -40,7 +40,7 @@
                 </div>
 
                 <div class="form-group">
-                    <button type="submit" class="btn btn-outline-success" style="width:100%;">
+                    <button type="submit" class="btn btn-light" style="width:100%;">
                         {{ __('Login') }}
                     </button>
                     <div class="text-center">
@@ -57,14 +57,14 @@
                 @csrf
                 <input type="hidden" name="password" value="guestpass">
                 <input type="hidden" name="email" value="guest@guest.com" >
-            <button type="submit" class="btn btn-outline-success" style="width:100%;">
+            <button type="submit" class="btn btn-light" style="width:100%;">
                 ゲストユーザーログイン
             </button>
             </form>
             </div>
             <div class="mb-2">
             <a href="{{ route('register') }}">
-            <button type="submit" class="btn btn-outline-success" style="width:100%;">
+            <button type="submit" class="btn btn-light" style="width:100%;">
                 新規登録はこちら
             </button>
             </a>
