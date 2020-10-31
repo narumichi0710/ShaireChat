@@ -42,10 +42,8 @@
                     </div>
                     <div class="col-lg-4 d-flex">
                         <div class="card-body">
-
+                            @if(auth::check())
                             @if($post->users()->where('user_id', Auth::id())->exists())
-
-
                             <p class="text-right">
                                 <a href="{{ route('posts.show', $post->id) }}">
                                     <input type="submit" value="&#xf004;お気に入り登録" class="btn btn-outline-dark fas fa-heart" style="color:#68be8d;border-color:#68be8d;">
@@ -56,6 +54,7 @@
                                 @csrf
                                 <input type="submit" class="btn btn-outline-dark far fa-heart" value="&#xf004;お気に入り登録" style="color:#68be8d;border-color:#68be8d;">
                             </form>
+                            @endif
                             @endif
                             <div class="card-title text-right">
 

@@ -145,14 +145,12 @@
                             <a class="btn btn-light mr-4 mt-2" href="{{ route('login') }}">新規登録 / ログイン</a>
                         </li>
                         @endif
-
-
                     </ul>
                     @if(auth::check())
                     <div class="dropdown ml-0" id="navber-item">
                         <a href="#" id="dropdown-menu" class="dropdown" data-toggle="dropdown" role="button" 　aria-haspopup="true" aria-expanded="false">
-                            @if(isset($post->user->thumbnail))
-                            <img src="/storage/user/{{ $post->user->thumbnail }}" alt="" style="width:40px; height:40px; border-radius:50%;">
+                        @if(!empty($authUser->thumbnail))
+                            <img src="/storage/user/{{ $authUser->thumbnail }}" alt="" style="width:40px; height:40px; border-radius:50%;">
                             @else
                             <img src="/storage/image/icon.jpg" style="width:40px; height:40px; border-radius:50%;">
                             @endif
@@ -280,6 +278,7 @@
             elem.dispatchEvent(new Event('change'));
         });
     </script>
+    
 </body>
 
 </html>

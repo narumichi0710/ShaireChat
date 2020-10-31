@@ -1,8 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Nunito);
 
 
-
-
 /*!
  * Bootstrap v4.5.2 (https://getbootstrap.com/)
  * Copyright 2011-2020 The Bootstrap Authors
@@ -198,9 +196,7 @@
 
   font-size:1.3em;
     }
-    }
-
-
+}
 
 
 #navFormControl {
@@ -375,15 +371,13 @@ img {
 .gallery {
     display: flex;
     flex-wrap: wrap;
-    margin: -1rem -1rem;
-    padding-bottom: 3rem;
     margin:300px;
 }
 
 .gallery-item {
     position: relative;
     flex: 1 0 22rem;
-    margin: 1rem;
+
     color: #fff;
     cursor: pointer;
     background-color:white;
@@ -552,7 +546,7 @@ Remove or comment-out the code block below to see how the browser will fall-back
 
     @supports (display: grid) {
     .gallery {
-        width:90%;
+        width: 85%;
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
         background-color:white;
@@ -638,6 +632,8 @@ footer {
     width:60px;
     font-size:0.8em;
 }
+
+
 
 :root {
   --blue: #3490dc;

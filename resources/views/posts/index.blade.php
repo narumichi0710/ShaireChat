@@ -68,17 +68,33 @@
             <div class="col-lg-2 nav-category">
                 <select class="form-control" id="navFormControl" name="category_id">
                     <option value="" style="display:none;">カテゴリーから探す</option>
-                    <option value="1">薬剤</option>
-                    <option value="2">スタイリング剤</option>
-                    <option value="3">カットウィッグ / クランプ</option>
-                    <option value="4">美容道具</option>
-                    <option value="5">バリカン / トリマー</option>
-                    <option value="6">ヘアエクステ / ウィッグ</option>
-                    <option value="7">シザース / レザー</option>
-                    <option value="8">ドライヤー</option>
-                    <option value="9">コーム / ブラシ</option>
-                    <option value="10">その他</option>
-                </select>
+                    <option value="1"> カラー剤</a></li>
+                    <option value="2"> パーマ剤</a></li>
+                    <option value="3"> カットウィッグ</a></li>
+                    <option value="4"> ヘアケア</a></li>
+                    <option value="5"> バリカン/トリマー</a></li>
+                    <option value="6"> ヘアエクステ/ウィッグ</a></li>
+                    <option value="7"> シザース/レザー</a></li>
+                    <option value="8"> ドライヤー</a></li>
+                    <option value="9"> コーム/ブラシ</a></li>
+                    <option value="10"> 理美容品/小物</a></li>
+                    <option value="11"> セット椅子</a></li>
+                    <option value="12"> スタイリングチェア</a></li>
+                    <option value="13"> シャンプーチェア</a></li>
+                    <option value="14"> シャンプー台</a></li>
+                    <option value="15"> シャンプー関連機器</a></li>
+                    <option value="16"> セット面/ミラー</a></li>
+                    <option value="17"> バーバー椅子</a></li>
+                    <option value="18"> 理容室関連機器</a></li>
+                    <option value="19"> サインポール</a></li>
+                    <option value="20"> 促進器/スチーマー</a></li>
+                    <option value="21"> スツール/ワゴン</a></li>
+                    <option value="22"> タオルウォーマー</a></li>
+                    <option value="23"> 消毒器</a></li>
+                    <option value="24"> サロン家具</a></li>
+                    <option value="25"> サロンインテリア</a></li>
+                    <option value="26"> 本/参考書</a></li>
+                        </select>
             </div>
             <div class="col-lg-2 nav-search">
                 <input name="search" value="" class="form-control" id="navFormControl" type="text" placeholder="キーワードを入力">
@@ -89,6 +105,7 @@
         </div>
     </form>
 </div>
+
 
 <div>
     <div class="container pt-4">
@@ -122,8 +139,7 @@
             <p><a href="/?buy_id=1">もっと見る <i class="fas fa-angle-right" style="font-size:1.1em;"></i> </a></p>
         </div>
         <div class="gallery">
-            @foreach($posts as $post)
-            @if($post->buy_id = 1)
+            @foreach($buy_id_1 as $post)
             <div class="gallery-item m-auto" tabindex="0">
 
                 <div class="gallery-item-each m-auto">
@@ -143,7 +159,6 @@
                     @endif
                 </a>
             </div>
-            @endif
             @endforeach
         </div>
         <div class="row justify-content-between m-auto" style="border-bottom:1px solid lightgray; width:95%;">
@@ -151,8 +166,7 @@
             <p><a href="/?buy_id=2">もっと見る <i class="fas fa-angle-right" style="font-size:1.1em;"></i></a></p>
         </div>
         <div class="gallery">
-            @foreach($posts as $post)
-            @if($post->buy_id = 2)
+            @foreach($buy_id_2 as $post)
             <div class="gallery-item m-auto" tabindex="0">
 
                 <div class="gallery-item-each m-auto">
@@ -172,7 +186,6 @@
                     @endif
                 </a>
             </div>
-            @endif
             @endforeach
         </div>
         <div class="row justify-content-between m-auto" style="border-bottom:1px solid lightgray; width:95%;">
@@ -180,8 +193,7 @@
             <p><a href="/?buy_id=3">もっと見る <i class="fas fa-angle-right" style="font-size:1.1em;"></i></a></p>
         </div>
         <div class="gallery">
-            @foreach($posts as $post)
-            @if($post->buy_id = 3)
+            @foreach($buy_id_3 as $post)
             <div class="gallery-item m-auto" tabindex="0">
                 <div class="gallery-item-each m-auto">
                     <div class="gallery-item-info d-flex justify-content-between">
@@ -200,7 +212,6 @@
                     @endif
                 </a>
             </div>
-            @endif
             @endforeach
         </div>
         <div class="row justify-content-between m-auto" style="border-bottom:1px solid lightgray; width:95%;">
@@ -208,8 +219,7 @@
             <p><a href="/?buy_id=4">もっと見る <i class="fas fa-angle-right" style="font-size:1.1em;"></i></a></p>
         </div>
         <div class="gallery">
-            @foreach($posts as $post)
-            @if($post->buy_id = 4)
+            @foreach($buy_id_4 as $post)
             <div class="gallery-item m-auto" tabindex="0">
                 <div class="gallery-item-each m-auto">
                     <div class="gallery-item-info d-flex justify-content-between">
@@ -228,7 +238,6 @@
                     @endif
                 </a>
             </div>
-            @endif
             @endforeach
         </div>
 

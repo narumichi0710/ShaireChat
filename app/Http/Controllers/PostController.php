@@ -22,54 +22,73 @@ class PostController extends Controller
         $authUser = Auth::user();
         $q = \Request::query();
         $param = ['authUser' => $authUser];
-
+        
         if (isset($q['category_id'])) {
             $posts = Post::latest()->where('category_id', $q['category_id'])->simplePaginate(10);
+            $search_result = '検索結果　'.$posts->count().'件';
 
             return view('posts.category', [
                 'posts' => $posts, $param,
                 'authUser' => $authUser,
+                'search_result' => $search_result
             ]);
 
         } else if (isset($q['prefecture_id'])) {
             $posts = Post::latest()->where('prefecture_id', $q['prefecture_id'])->simplePaginate(10);
-
+            $search_result = '検索結果　'.$posts->count().'件';
             return view('posts.category', [
                 'posts' => $posts, $param,
                 'authUser' => $authUser,
+                'search_result' => $search_result
             ]);
 
         } else if (isset($q['buy_id'])) {
-            $posts = Post::latest() ->where('buy_id', $q['buy_id'])->simplePaginate(10);
-
+            $posts = Post::latest()->where('buy_id', $q['buy_id'])->simplePaginate(10);
+            $search_result = '検索結果　'.$posts->count().'件';
             return view('posts.category', [
                 'posts' => $posts, $param,
                 'authUser' => $authUser,
+                'search_result' => $search_result
             ]);
-        }
-        $posts = Post::latest()->simplePaginate(12);
-        return view('posts.index', [
-            'posts' => $posts, $param,
-            'authUser' => $authUser
-        ]);
+        } else {
+            $posts = Post::latest()->simplePaginate(12);
+            $buy_id_1 = Post::latest()->where('buy_id', 1)->simplePaginate(12);
+            $buy_id_2 = Post::latest()->where('buy_id', 2)->simplePaginate(12);
+            $buy_id_3 = Post::latest()->where('buy_id', 3)->simplePaginate(12);
+            $buy_id_4 = Post::latest()->where('buy_id', 4)->simplePaginate(12);
+
+            return view('posts.index', [
+                'authUser' => $authUser,
+                'posts' => $posts,
+                'buy_id_1' => $buy_id_1, 
+                'buy_id_2' => $buy_id_2, 
+                'buy_id_3' => $buy_id_3,
+                'buy_id_4' => $buy_id_4
+            ]);       
+        } 
     }
+
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create() {
+
+    public function create() 
+    {
         $authUser = Auth::user();
         $param = ['authUser' => $authUser,];
 
         return view('posts.create', ['authUser' => $authUser, $param,]);
     }
+
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
     public function store(PostRequest $request)
     {
         if ($request->isMethod('post')) {
@@ -119,6 +138,7 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function edit($post_id)
     {
         $post = Post::findOrFail($post_id);
@@ -135,6 +155,7 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function update($post_id,Request $request)
     {
         $post = Post::findOrFail($post_id);
@@ -239,11 +260,11 @@ class PostController extends Controller
             $posts = Post::latest()->simplePaginate(10);
         }
         $search_result = '検索結果　'.$posts->count().'件';
+
         return view('posts.search', [
             'authUser' => $authUser,
             'posts' => $posts, $param,
             'search_result' => $search_result,
         ]);
-
-}
+    } 
 }
