@@ -30,7 +30,7 @@
                                 <form method="POST" action="{{ route('unfavorites', $post)}}" style="padding-left:5px;">
                                     @csrf
                                     <a href="{{ route('posts.show', $post->id) }}" style="padding-left:5px;">
-                                        <input type="submit" value="&#xf004;お気に入り登録" class="btn btn-outline-dark fas fa-heart" style="color:#68be8d;border-color:#68be8d;">
+                                        <input type="submit" value="&#xf004;お気に入り登録済み" class="btn btn-outline-dark fas fa-heart" style="color:#68be8d;border-color:#68be8d;">
                                     </a>
                                 </form>
                                 @else
@@ -42,13 +42,7 @@
 
                                 <div class="card-text"><small>投稿日：{{ date("Y-m-d H:i" ,strtotime($post->created_at)) }}</small>
                                 </div>
-                                <form method="POST" action="{{ route('posts.destroy', ['post' => $post]) }}">
-                                    @csrf
-                                    @method('DELETE')
-                                    @if(!empty($post->user_id == $authUser->id))
-                                    <button class="btn btn-outline-danger" style="padding:2px 20px;">削除する</button>
-                                    @endif
-                                </form>
+                              
                             </div>
                             <div>
                                 <table class="profile-info">

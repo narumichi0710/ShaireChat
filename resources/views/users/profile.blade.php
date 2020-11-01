@@ -37,15 +37,15 @@
                 </div>
                 @foreach($posts as $post)
                 @if($post->users()->where('user_id', Auth::id())->exists())
-                <div class="card">
-                    <div class="card-body text-left">
-                        <div class="card-title text-left">
-                        <a href="{{ route('posts.show', $post->id )}}">
-                            <h5 class="card-title">{{ $post->title }}</h5>
-                        </a>
+                <a href="{{ route('posts.show', $post->id )}}">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="card-title text-left">
+                                <h5 class="card-title">{{ $post->title }}</h5>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </a>
                 @endif
                 @endforeach
             </div>

@@ -48,17 +48,18 @@
                     <div class="card-body">
                         @if(auth::check())
                         @if($post->users()->where('user_id', Auth::id())->exists())
-                        <p class="text-right">
-                            <a href="{{ route('posts.show', $post->id) }}">
-                                <input type="submit" value="&#xf004;お気に入り登録" class="btn btn-outline-dark fas fa-heart" style="color:#68be8d;border-color:#68be8d;">
-                            </a>
-                        </p>
-                        @else
-                        <form method="POST" class="text-right" action="{{ route('favorites', $post)}}">
-                            @csrf
-                            <input type="submit" class="btn btn-outline-dark far fa-heart" value="&#xf004;お気に入り登録" style="color:#68be8d;border-color:#68be8d;">
-                        </form>
-                        @endif
+                                <form method="POST" action="{{ route('unfavorites', $post)}}" class="text-right">
+                                    @csrf
+                                    <a href="">
+                                        <input type="submit" value="&#xf004;お気に入り登録済み" class="btn btn-outline-dark fas fa-heart" style="color:#68be8d;border-color:#68be8d;">
+                                    </a>
+                                </form>
+                                @else
+                                <form method="POST" action="{{ route('favorites', $post )}}" class="text-right">
+                                    @csrf
+                                    <input type="submit" name="favorite_id" class="btn btn-outline-dark far fa-heart" value="&#xf004;お気に入り登録" style="color:#68be8d;border-color:#68be8d;">
+                                </form>
+                                @endif
                         @endif
                         <div class="card-title text-right">
                             <small>投稿日：{{ date("Y-m-d H:i" ,strtotime($post->created_at)) }}</small><br>

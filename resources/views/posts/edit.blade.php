@@ -32,9 +32,15 @@
                             @endif
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="exampleFormControlFile1">ファイルを選択する</label>
-                            <input type="file" class="form-control-file" id="exampleFormControlFile1" value="{{ asset('storage/image/'.$post->image) }}" name="image" multiple>
+
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="inputFile" name="image" value="{{ old('image') }}" multiple>
+                            <label class="custom-file-label" for="inputFile" data-browse="参照">ファイルを選択する</label>
                         </div>
+                        <div class="input-group-append pt-2">
+                            <button type="button" class="btn btn-outline-secondary input-group-text" id="inputFileReset">取消</button>
+                        </div>
+                         </div>
                         <div class="form-group col-md-12">
                             <label for="comment">本文</label>
                             <textarea class="form-control" rows="5" id="comment" name="content">{{ $post->content }}</textarea>
@@ -56,6 +62,16 @@
                             <div class="form-group col-md-6 pt-3"><a href="{{ route('posts.show' , $post->id) }}" class="btn btn-primary">戻る</a></div>
                             <input type="hidden" name="user_id" value="{{ Auth::id() }}">
                     </form>
+                </div>
+            </div>
+            <div class="card mt-3 p-3">
+                <div class="card-body">
+                    <div class="card-title">この投稿を削除する</div>
+                <form method="POST" action="{{ route('posts.destroy', ['post' => $post]) }}">
+                @csrf
+                @method('DELETE')
+                <button class="btn btn-danger">削除</button>
+                </form>
                 </div>
             </div>
         </div>
