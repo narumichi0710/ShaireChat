@@ -377,7 +377,7 @@
         </div>
 
         <ul class="category m-auto">
-            <li><a href="/?category_id=1">カラー剤</a></li>
+            <li><a href="/?category_id=1"> カラー剤</a></li>
             <li><a href="/?category_id=2"> パーマ剤</a></li>
             <li><a href="/?category_id=3">カットウィッグ</a></li>
             <li><a href="/?category_id=4"> ヘアケア</a></li>
