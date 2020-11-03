@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('title','プロフィール')
 @section('content')
-<div class="container mt-4" style="width:80%;">
+<div class="container">
     @if (session('status'))
     <div class="alert alert-success" role="alert">
         {{ session('status') }}
@@ -69,5 +69,5 @@
         </div>
     </div>
 </div>
-</div>
+
 @endsection

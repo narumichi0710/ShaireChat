@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @section('content')
-
-<div class="jumbotron pt-2 pb-4" style="background-color:F3F6F6">
+<div class="jumbotron pt-2 pb-4">
     <form method="get" action="{{ route('posts.search') }}" class="pt-3" accept-charset="UTF-8">
         <div class="form-row">
             <div class="col-lg-2 ml-auto nav-buy">
@@ -94,7 +93,7 @@
                     <option value="24"> サロン家具</a></li>
                     <option value="25"> サロンインテリア</a></li>
                     <option value="26"> 本/参考書</a></li>
-                        </select>
+                </select>
             </div>
             <div class="col-lg-2 nav-search">
                 <input name="search" value="" class="form-control" id="navFormControl" type="text" placeholder="キーワードを入力">
@@ -106,10 +105,142 @@
     </form>
 </div>
 
+<div class="container-fluid" id="top">
+    <div class="tab_wrap m-auto" id="top-responsive">
+        <input id="tab1" type="radio" name="tab_btn" checked>
+        <input id="tab2" type="radio" name="tab_btn">
+        <input id="tab3" type="radio" name="tab_btn">
+        <input id="tab4" type="radio" name="tab_btn">
+        <input id="tab5" type="radio" name="tab_btn">
 
-<div>
-    <div class="container pt-4">
-        <div class="row justify-content-between m-auto" style="border-bottom:1px solid lightgray; width:95%;">
+        <div class="tab_area">
+            <label class="tab2_label" for="tab2">あげます</label>
+            <label class="tab3_label" for="tab3">売ります</label>
+            <label class="tab4_label" for="tab4">ください</label>
+            <label class="tab5_label" for="tab5">買います</label>
+        </div>
+        <div class="panel_area">
+            <div id="panel1" class="tab_panel">
+                <div class="gallery">
+                    @foreach($posts as $post)
+                    <div class="gallery-item m-auto" tabindex="0">
+                        <div class="gallery-item-each m-auto">
+                            <div class="gallery-item-info d-flex justify-content-between">
+                                <div>@if(!empty($post->prefecture->prefecture_name))
+                                    {{ $post->prefecture->prefecture_name }}
+                                    @endif</div>
+                                <div>{{ $post->price }}円</div>
+                            </div>
+                        </div>
+                        <a href="{{ route('posts.show', $post->id) }}">
+                            @if(isset($post->image))
+                            <img src="{{ asset('storage/image/'.$post->image) }}" alt="" class="gallery-image">
+                            @else
+                            <img src="{{ asset('storage/image/noimage.jpg') }}" alt="" class="gallery-image">
+                            @endif
+                        </a>
+                    </div>
+                    @endforeach
+                </div>
+            </div>
+            <div id="panel2" class="tab_panel">
+                <div class="gallery">
+                    @foreach($buy_id_1 as $post)
+                    <div class="gallery-item m-auto" tabindex="0">
+                        <div class="gallery-item-each m-auto">
+                            <div class="gallery-item-info d-flex justify-content-between">
+                                <div>@if(!empty($post->prefecture->prefecture_name))
+                                    {{ $post->prefecture->prefecture_name }}
+                                    @endif</div>
+                                <div>{{ $post->price }}円</div>
+                            </div>
+                        </div>
+                        <a href="{{ route('posts.show', $post->id) }}">
+                            @if(isset($post->image))
+                            <img src="{{ asset('storage/image/'.$post->image) }}" alt="" class="gallery-image">
+                            @else
+                            <img src="{{ asset('storage/image/noimage.jpg') }}" alt="" class="gallery-image">
+                            @endif
+                        </a>
+                    </div>
+                    @endforeach
+                </div>
+            </div>
+            <div id="panel3" class="tab_panel">
+                <div class="gallery">
+                    @foreach($buy_id_2 as $post)
+                    <div class="gallery-item m-auto" tabindex="0">
+                        <div class="gallery-item-each m-auto">
+                            <div class="gallery-item-info d-flex justify-content-between">
+                                <div>@if(!empty($post->prefecture->prefecture_name))
+                                    {{ $post->prefecture->prefecture_name }}
+                                    @endif</div>
+                                <div>{{ $post->price }}円</div>
+                            </div>
+                        </div>
+                        <a href="{{ route('posts.show', $post->id) }}">
+                            @if(isset($post->image))
+                            <img src="{{ asset('storage/image/'.$post->image) }}" alt="" class="gallery-image">
+                            @else
+                            <img src="{{ asset('storage/image/noimage.jpg') }}" alt="" class="gallery-image">
+                            @endif
+                        </a>
+                    </div>
+                    @endforeach
+                </div>
+            </div>
+            <div id="panel4" class="tab_panel">
+                <div class="gallery">
+                    @foreach($buy_id_3 as $post)
+                    <div class="gallery-item m-auto" tabindex="0">
+                        <div class="gallery-item-each m-auto">
+                            <div class="gallery-item-info d-flex justify-content-between">
+                                <div>
+                                    @if(!empty($post->prefecture->prefecture_name))
+                                    {{ $post->prefecture->prefecture_name }}
+                                    @endif</div>
+                                <div>{{ $post->price }}円</div>
+                            </div>
+                        </div>
+                        <a href="{{ route('posts.show', $post->id) }}">
+                            @if(isset($post->image))
+                            <img src="{{ asset('storage/image/'.$post->image) }}" alt="" class="gallery-image">
+                            @else
+                            <img src="{{ asset('storage/image/noimage.jpg') }}" alt="" class="gallery-image">
+                            @endif
+                        </a>
+                    </div>
+                    @endforeach
+                </div>
+            </div>
+            <div id="panel5" class="tab_panel">
+                <div class="gallery">
+                    @foreach($buy_id_4 as $post)
+                    <div class="gallery-item m-auto" tabindex="0">
+                        <div class="gallery-item-each m-auto">
+                            <div class="gallery-item-info d-flex justify-content-between">
+                                <div>@if(!empty($post->prefecture->prefecture_name))
+                                    {{ $post->prefecture->prefecture_name }}
+                                    @endif
+                                </div>
+                                <div>{{ $post->price }}円</div>
+                            </div>
+                        </div>
+                        <a href="{{ route('posts.show', $post->id) }}">
+                            @if(isset($post->image))
+                            <img src="{{ asset('storage/image/'.$post->image) }}" alt="" class="gallery-image">
+                            @else
+                            <img src="{{ asset('storage/image/noimage.jpg') }}" alt="" class="gallery-image">
+                            @endif
+                        </a>
+                    </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="top-pc">
+        <div class="row justify-content-between" id="top-row">
             <h4 class="pb-3">新着情報</h4>
             <p><a href="/post/search?">新着情報をもっと見る <i class="fas fa-angle-right" style="font-size:1.1em;"></i></a></p>
         </div>
@@ -134,7 +265,7 @@
             </div>
             @endforeach
         </div>
-        <div class="row justify-content-between m-auto" style="border-bottom:1px solid lightgray; width:95%;">
+        <div class="row justify-content-between" id="top-row">
             <h4 class="pb-3">あげます</h4>
             <p><a href="/?buy_id=1">もっと見る <i class="fas fa-angle-right" style="font-size:1.1em;"></i> </a></p>
         </div>
@@ -161,7 +292,8 @@
             </div>
             @endforeach
         </div>
-        <div class="row justify-content-between m-auto" style="border-bottom:1px solid lightgray; width:95%;">
+
+        <div class="row justify-content-between" id="top-row">
             <h4 class="pb-3">売ります</h4>
             <p><a href="/?buy_id=2">もっと見る <i class="fas fa-angle-right" style="font-size:1.1em;"></i></a></p>
         </div>
@@ -188,7 +320,7 @@
             </div>
             @endforeach
         </div>
-        <div class="row justify-content-between m-auto" style="border-bottom:1px solid lightgray; width:95%;">
+        <div class="row justify-content-between" id="top-row">
             <h4 class="pb-3">ください</h4>
             <p><a href="/?buy_id=3">もっと見る <i class="fas fa-angle-right" style="font-size:1.1em;"></i></a></p>
         </div>
@@ -214,7 +346,7 @@
             </div>
             @endforeach
         </div>
-        <div class="row justify-content-between m-auto" style="border-bottom:1px solid lightgray; width:95%;">
+        <div class="row justify-content-between" id="top-row">
             <h4 class="pb-3">買います</h4>
             <p><a href="/?buy_id=4">もっと見る <i class="fas fa-angle-right" style="font-size:1.1em;"></i></a></p>
         </div>
@@ -240,11 +372,11 @@
             </div>
             @endforeach
         </div>
-
-        <div class="row m-auto pt-3" style="border-bottom:1px solid lightgray; width:95%;">
-            <h4>カテゴリー</h4>
+        <div class="row pt-3 mb-4" id="top-row">
+            <h4 class="mb-3">カテゴリー</h4>
         </div>
-        <ul class="category text-center">
+
+        <ul class="category m-auto">
             <li><a href="/?category_id=1">カラー剤</a></li>
             <li><a href="/?category_id=2"> パーマ剤</a></li>
             <li><a href="/?category_id=3">カットウィッグ</a></li>

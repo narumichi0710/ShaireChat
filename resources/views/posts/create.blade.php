@@ -1,11 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container mt-4">
+<div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-10">
-            <div class="card-header" id="header">投稿</div>
+        <div class="col-md-12">
+           
             <div class="card-body">
+            <div class="card-header mb-3" id="header">投稿</div>
                 @if (session('status'))
                 <div class="alert alert-success" role="alert">
                     {{ session('status') }}

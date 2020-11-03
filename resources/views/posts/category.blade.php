@@ -2,7 +2,7 @@
 @section('content')
 
 
-<div class="container pt-4 w-75">
+<div class="container">
     @isset($search_result)
     <h5 class="card-title">{{ $search_result }}</h5>
     @endisset
@@ -51,13 +51,13 @@
                                 <form method="POST" action="{{ route('unfavorites', $post)}}" class="text-right">
                                     @csrf
                                     <a href="">
-                                        <input type="submit" value="&#xf004;お気に入り登録済み" class="btn btn-outline-dark fas fa-heart" style="color:#68be8d;border-color:#68be8d;">
+                                        <input type="submit" value="&#xf004;お気に入り登録済み" class="btn btn-outline-dark fas fa-heart" id="unfavorite">
                                     </a>
                                 </form>
                                 @else
                                 <form method="POST" action="{{ route('favorites', $post )}}" class="text-right">
                                     @csrf
-                                    <input type="submit" name="favorite_id" class="btn btn-outline-dark far fa-heart" value="&#xf004;お気に入り登録" style="color:#68be8d;border-color:#68be8d;">
+                                    <input type="submit" name="favorite_id" class="btn btn-outline-dark far fa-heart" value="&#xf004;お気に入り登録" id="favorite">
                                 </form>
                                 @endif
                         @endif
