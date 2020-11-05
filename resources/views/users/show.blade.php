@@ -25,8 +25,6 @@
                     <div class="card-text">{{ $authUser->name }}</div>
                     <label class="mt-3">自己紹介</lavel>
                         <div class="card-text">{{ $authUser->profile }}</div>
-                        <a href="{{ route('user.userEdit')}}">
-                        </a>
                 </div>
             </div>
         </div>
@@ -37,7 +35,6 @@
                     {{$authUser->name}}さんの投稿
                 </div>
                 @foreach($authUser->posts as $post)
-
                 <div class="card">
                     <div class="card-body">
                         <a href="{{ route('posts.show', $post->id )}}">

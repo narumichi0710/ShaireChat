@@ -32,14 +32,12 @@ class UserController extends Controller
     public function profile()
     {
         $authUser = Auth::user();
-        $param = [
-            'authUser' => $authUser,
-        ];
         $posts = Post::latest()->simplePaginate(10);
 
         return view('users.profile', [
-            'posts' => $posts, $param,
-            'authUser' => $authUser
+            'posts' => $posts,
+            'authUser' => $authUser,
+
         ]);
     }
 
@@ -85,9 +83,9 @@ class UserController extends Controller
 
     public function userUpdateEmail(ChangeEmailRequest $request)
     {
-       $param = [
-                'email' => $request->email,
-            ];
+        $param = [
+            'email' => $request->email,
+        ];
         User::where('id', $request->user_id)->update($param);
         return redirect(route('users.index'))->with('success', 'メールアドレスを変更しました。');
     }

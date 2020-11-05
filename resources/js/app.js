@@ -29,3 +29,5 @@ Vue.component('top-component', require('./components/TopComponent.vue').default)
 const app = new Vue({
     el: '#app',
 });
+
+

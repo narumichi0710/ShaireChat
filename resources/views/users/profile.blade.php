@@ -7,7 +7,6 @@
         {{ session('status') }}
     </div>
     @endif
-
     <div class="row">
         <div class="col-md-4 mt-2">
             <div class="card">
@@ -24,7 +23,7 @@
                     <label class="mt-3">自己紹介</lavel>
                         <div class="card-text">{{ $authUser->profile }}</div>
                         <a href="{{ route('user.userEdit')}}">
-                            <button type="submit" class="btn btn-outline-success btn-sm w-100 mt-4 mb-2">プロフィールを変更する</button>
+                            <button type="submit" class="btn btn-outline-success btn-sm w-100 mt-4 mb-2">プロフィールを編集する</button>
                         </a>
                 </div>
             </div>
@@ -54,7 +53,6 @@
                     あなたの投稿
                 </div>
                 @foreach($authUser->posts as $post)
-
                 <div class="card">
                     <div class="card-body">
                         <a href="{{ route('posts.show', $post->id )}}">
@@ -69,5 +67,4 @@
         </div>
     </div>
 </div>
-
 @endsection

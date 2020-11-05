@@ -20,7 +20,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','thumbnail','profile', 'post_id'
+        'name', 'email', 'password', 'thumbnail', 'profile', 'post_id'
     ];
 
     /**
@@ -50,9 +50,4 @@ class User extends Authenticatable
     {
         return $this->belongsToMany('App\Models\Post')->withTimestamps();
     }
-
-
-
-
-
 }

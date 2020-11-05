@@ -30,8 +30,8 @@
                                 <form method="POST" action="{{ route('unfavorites', $post)}}">
                                     @csrf
                                     <a href="{{ route('posts.show', $post->id) }}">
-                                       <input type="submit" value="&#xf004;お気に入り登録済み" class="btn btn-outline-dark fas fa-heart" id="unfavorite">
-                                       </a>
+                                        <input type="submit" value="&#xf004;お気に入り登録済み" class="btn btn-outline-dark fas fa-heart" id="unfavorite">
+                                    </a>
                                 </form>
                                 @else
                                 <form method="POST" action="{{ route('favorites', $post )}}" style="padding-left:5px;">
@@ -67,10 +67,9 @@
                             </tr>
                             <tr>
                                 <td>投稿者 : </td>
-                                <td><a href="{{ route('users.show')}}">{{ $post->user->name }}</a></td>
+                                <td><a href="{{ route('users.show', $post) }}">{{ $post->user->name }}</a></td>
                             </tr>
                         </table>
-
                         @if(!empty($post->user_id == $authUser->id))
                         <div class="card-text text-center"><a class="btn btn-success w-75 mt-4" href="{{ route('posts.edit', $post->id )}}">編集する</a></div>
                         @endif
@@ -102,6 +101,4 @@
         </div>
     </div>
 </div>
-
-
 @endsection
