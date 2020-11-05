@@ -364,17 +364,13 @@ img {
     position: absolute;
 }
 
-/*!
-.gallery-item:hover .gallery-item-info,
-.gallery-item:focus .gallery-item-info {
-width:180px;
-display: flex;
-top: 0;
-width: 100%;
-height: 100%;
-background-color: rgba(0, 0, 0, 0.3);
+.gallery-item:hover {
+    transform: scale(1.1, 1.1);
+    transition: 0.2s;
 }
-*/
+.gallery-item {
+    transition: 0.5s;
+}
 
 .gallery-image {
     margin: 0 auto;
@@ -506,11 +502,6 @@ background-color: rgba(0, 0, 0, 0.3);
     padding-top: 20px;
     margin: 10px auto;
 }
-
-/*
-The following code will only run if your browser supports CSS grid.
-Remove or comment-out the code block below to see how the browser will fall-back to flexbox & floated styling.
-*/
 
 @supports (display: grid) {
     .gallery {

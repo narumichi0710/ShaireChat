@@ -22,6 +22,9 @@
                     <div class="card-text">{{ $authUser->name }}</div>
                     <label class="mt-3">自己紹介</lavel>
                         <div class="card-text">{{ $authUser->profile }}</div>
+                        @if($authUser->profile == null)
+                        <div class="card-text pt-1"><small>自己紹介はまだ書いていません。</small></div>
+                        @endif
                         <a href="{{ route('user.userEdit')}}">
                             <button type="submit" class="btn btn-outline-success btn-sm w-100 mt-4 mb-2">プロフィールを編集する</button>
                         </a>
@@ -50,7 +53,7 @@
             </div>
             <div class="col-md-12 mt-3">
                 <div class="card-header" id="header">
-                    あなたの投稿
+                    {{ $authUser->name }}さんの投稿
                 </div>
                 @foreach($authUser->posts as $post)
                 <div class="card">

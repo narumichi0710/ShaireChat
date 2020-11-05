@@ -37,7 +37,6 @@ class UserController extends Controller
         return view('users.profile', [
             'posts' => $posts,
             'authUser' => $authUser,
-
         ]);
     }
 
