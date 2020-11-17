@@ -1,0 +1,451 @@
+-- phpMyAdmin SQL Dump
+-- version 4.9.3
+-- https://www.phpmyadmin.net/
+--
+-- Host: localhost:3306
+-- Generation Time: Oct 03, 2020 at 11:21 AM
+-- Server version: 5.7.26
+-- PHP Version: 7.4.2
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+--
+-- Database: `board`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `categories`
+--
+
+CREATE TABLE `categories` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `category_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `categories`
+--
+
+INSERT INTO `categories` (`id`, `category_name`, `created_at`, `updated_at`) VALUES
+(1, 'hair', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `comments`
+--
+
+CREATE TABLE `comments` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `post_id` bigint(20) UNSIGNED NOT NULL,
+  `comment` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `failed_jobs`
+--
+
+CREATE TABLE `failed_jobs` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `uuid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `migrations`
+--
+
+CREATE TABLE `migrations` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `batch` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `migrations`
+--
+
+INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
+(1, '2014_10_12_000000_create_users_table', 1),
+(2, '2014_10_12_100000_create_password_resets_table', 1),
+(3, '2019_08_19_000000_create_failed_jobs_table', 1),
+(4, '2020_09_15_231044_create_categories_table', 1),
+(5, '2020_09_15_231111_create_posts_table', 1),
+(6, '2020_09_15_231143_create_comments_table', 1),
+(7, '2020_09_17_135759_add_image', 1),
+(8, '2020_09_17_224207_create_tags_table', 1),
+(9, '2020_09_17_224308_create_post_tag_table', 1),
+(10, '2020_09_19_163721_add_thumbnail', 1),
+(15, '2020_09_20_173304_add_softdeletes_to_users', 2),
+(16, '2020_09_22_201352_post_user_table', 2),
+(17, '2020_10_02_153411_create_products_table', 2),
+(18, '2020_10_02_154630_create_product_reviews_table', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `password_resets`
+--
+
+CREATE TABLE `password_resets` (
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `posts`
+--
+
+CREATE TABLE `posts` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `category_id` bigint(20) UNSIGNED NOT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `content` text COLLATE utf8mb4_unicode_ci,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `posts`
+--
+
+INSERT INTO `posts` (`id`, `user_id`, `category_id`, `title`, `content`, `created_at`, `updated_at`, `image`) VALUES
+(3, 1, 1, 'テスト', 'テスト', '2020-10-02 10:05:24', '2020-10-02 10:05:24', 'FHAGEvFUwO5JyYOere5XyJKsruHHTrdQFxhwWHn0.jpeg'),
+(4, 1, 1, 'テスト', 'テスト', '2020-10-02 10:06:11', '2020-10-02 10:06:11', 'xkyrG6AO0OcXVWIFCwTjCk7G9NjmDgdIk2lkJ0Fi.jpeg'),
+(5, 1, 1, 'テスト', 'テスト', '2020-10-02 10:06:30', '2020-10-02 10:06:30', 'Rc4VB2HcPc4IQEfzwqoooARmRHtyG6BMDBuL6cpz.jpeg'),
+(6, 1, 1, 'テスト', 'テスト', '2020-10-02 10:06:53', '2020-10-02 10:06:53', 'SaW6ZFlPqH8AUobGQRtHMVFzsrVVXmdAhRWgc4bJ.jpeg'),
+(7, 1, 1, 'テスト', 'テスト', '2020-10-02 10:07:06', '2020-10-02 10:07:06', 'sl8sU6CDEnsxCAolQUVeVOxfPI0wscUVrRskZnqF.jpeg'),
+(8, 1, 1, 'テスト', 'テスト', '2020-10-02 10:07:20', '2020-10-02 10:07:20', 'WRJv2NHY2iOY3T99meW2dbt2JhmwEfA2efmdWcHq.jpeg'),
+(9, 1, 1, 'テスト', 'テスト', '2020-10-02 10:07:34', '2020-10-02 10:07:34', 'jvauSHz4CUNXRMaje2nBvYtIW0YwVgfrrVaU2gj6.jpeg'),
+(10, 1, 1, 'テスト', 'テスト', '2020-10-02 10:08:46', '2020-10-02 10:08:46', 'ME5KXoBSHmg8xlyexLbBXAFV2u8SyQ3S9OKvwZk5.jpeg'),
+(11, 1, 1, 'テスト', 'テスト', '2020-10-02 10:09:00', '2020-10-02 10:09:00', 'AgwDOqTRgj1IurMiyfH1j9fkbapGofi6rh1aEQn6.webp'),
+(12, 2, 1, 'テスト', 'テスト', '2020-10-03 09:48:53', '2020-10-03 09:48:53', 'uwkO4khY7gZ9cjnzYzPbcjazrz4OJy0EMUOY9cUw.jpeg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `post_tag`
+--
+
+CREATE TABLE `post_tag` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `post_id` bigint(20) UNSIGNED NOT NULL,
+  `tag_id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `post_user`
+--
+
+CREATE TABLE `post_user` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `post_id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `products`
+--
+
+CREATE TABLE `products` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `product_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '商品名',
+  `product_image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `product_content` text COLLATE utf8mb4_unicode_ci
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`id`, `product_name`, `product_image`, `created_at`, `updated_at`, `product_content`) VALUES
+(1, 'テスト商品名', '', NULL, NULL, NULL),
+(2, 'テスト商品名2', '', NULL, NULL, NULL),
+(3, 'テスト商品名3', '', NULL, NULL, NULL),
+(4, 'テスト', '画像', NULL, NULL, '本文'),
+(5, 'テスト2', '画像', NULL, NULL, '本文'),
+(6, 'テスト3', '画像', NULL, NULL, '本文');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_reviews`
+--
+
+CREATE TABLE `product_reviews` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `product_id` bigint(20) UNSIGNED NOT NULL DEFAULT '0' COMMENT '商品ID',
+  `user_id` bigint(20) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'ユーザーID',
+  `stars` int(11) NOT NULL DEFAULT '0' COMMENT '星',
+  `comment` text COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'コメント',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tags`
+--
+
+CREATE TABLE `tags` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `tag_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email_verified_at` timestamp NULL DEFAULT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `thumbnail` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `thumbnail`, `deleted_at`) VALUES
+(1, 'naka', 'naka@com', NULL, '$2y$10$KVxXs2kbJ.FK6ntTQj./7enTwbJvyXBx10/jPNyc0aPkgRPNdi3ey', NULL, '2020-10-02 08:37:06', '2020-10-02 08:37:06', NULL, NULL),
+(2, 'aaaaaaaaaaaa', 'naka@gmail.com', NULL, '$2y$10$FLKXP//t5H4QVzc2gZ8nROy9FqaYRR75VVQjaUz9mQu7pd4n1TYAu', NULL, '2020-10-03 06:48:30', '2020-10-03 09:00:21', 'qwDClJ20a1SRad8NbvOVgSor96gujiyKzBElCSIr.jpeg', NULL);
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `categories`
+--
+ALTER TABLE `categories`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `comments`
+--
+ALTER TABLE `comments`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `comments_user_id_index` (`user_id`),
+  ADD KEY `comments_post_id_index` (`post_id`);
+
+--
+-- Indexes for table `failed_jobs`
+--
+ALTER TABLE `failed_jobs`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
+
+--
+-- Indexes for table `migrations`
+--
+ALTER TABLE `migrations`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `password_resets`
+--
+ALTER TABLE `password_resets`
+  ADD KEY `password_resets_email_index` (`email`);
+
+--
+-- Indexes for table `posts`
+--
+ALTER TABLE `posts`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `posts_user_id_index` (`user_id`),
+  ADD KEY `posts_category_id_index` (`category_id`);
+
+--
+-- Indexes for table `post_tag`
+--
+ALTER TABLE `post_tag`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `post_tag_post_id_index` (`post_id`),
+  ADD KEY `post_tag_tag_id_index` (`tag_id`);
+
+--
+-- Indexes for table `post_user`
+--
+ALTER TABLE `post_user`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `post_user_user_id_post_id_unique` (`user_id`,`post_id`),
+  ADD KEY `post_user_post_id_foreign` (`post_id`);
+
+--
+-- Indexes for table `products`
+--
+ALTER TABLE `products`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `product_reviews`
+--
+ALTER TABLE `product_reviews`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `product_reviews_product_id_user_id_unique` (`product_id`,`user_id`),
+  ADD KEY `product_reviews_user_id_foreign` (`user_id`);
+
+--
+-- Indexes for table `tags`
+--
+ALTER TABLE `tags`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `users_email_unique` (`email`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `categories`
+--
+ALTER TABLE `categories`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `comments`
+--
+ALTER TABLE `comments`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `failed_jobs`
+--
+ALTER TABLE `failed_jobs`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `migrations`
+--
+ALTER TABLE `migrations`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
+-- AUTO_INCREMENT for table `posts`
+--
+ALTER TABLE `posts`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `post_tag`
+--
+ALTER TABLE `post_tag`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `post_user`
+--
+ALTER TABLE `post_user`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `products`
+--
+ALTER TABLE `products`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `product_reviews`
+--
+ALTER TABLE `product_reviews`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tags`
+--
+ALTER TABLE `tags`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `comments`
+--
+ALTER TABLE `comments`
+  ADD CONSTRAINT `comments_post_id_foreign` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `comments_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `posts`
+--
+ALTER TABLE `posts`
+  ADD CONSTRAINT `posts_category_id_foreign` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `posts_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `post_tag`
+--
+ALTER TABLE `post_tag`
+  ADD CONSTRAINT `post_tag_post_id_foreign` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `post_tag_tag_id_foreign` FOREIGN KEY (`tag_id`) REFERENCES `tags` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `post_user`
+--
+ALTER TABLE `post_user`
+  ADD CONSTRAINT `post_user_post_id_foreign` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `post_user_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `product_reviews`
+--
+ALTER TABLE `product_reviews`
+  ADD CONSTRAINT `product_reviews_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`),
+  ADD CONSTRAINT `product_reviews_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
