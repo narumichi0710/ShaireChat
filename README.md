@@ -28,9 +28,10 @@ $ docker-compose up -d
 - コンテナの中に入る
 $ docker-compose exec web bash
 
-- composerをインストール
+- composerをインストール、アップデート
 $ composer install
 
+$ composer update
 
 - 途中
 （データベースをすぐ持ってこれる様にする）
